@@ -119,3 +119,6 @@ export interface Forecast {
 export interface LocalWeather extends Location {
 	forecasts: Forecast[];
 }
+
+// Custom pipe temp
+// https://codecraft.tv/courses/angular/pipes/custom-pipes/

@@ -1,14 +1,8 @@
-<div class="container">
-	<div class="sidebar">
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Locations</a></li>
-			<li><a href="#">Settings</a></li>
-		</ul>
-	</div>
-	<div class="main-content">
-		<div class= "toolbar"></div>
-
-		<div class="router-outlet"></div>
-	</div>
-</div>
+<mat-sidenav-container>
+	<mat-sidenav><h2>Sidebar</h2></mat-sidenav>
+	<mat-sidenav-content class="sidebar">
+		<h3><a href="home">Home</a></h3>
+		<h3><a href="locations">Locations</a></h3>
+		<h3><a href="settings">Settings</a></h3>
+	</mat-sidenav-content>
+</mat-sidenav-container>

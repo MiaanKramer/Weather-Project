@@ -1,3 +1,16 @@
-<p>
-  locations works!
-</p>
+<!-- <div class="container">
+	<div *ngFor='let loc of locations | async as Locations: index as i;'>
+		<p>{{i}}/{{locations.length}}. {{loc.name}} . Lat: .{{loc.lat}} . Lng: . {{loc.lng}}</p>
+		<div *ngFor='let cast of loc.forecasts'>
+			<span class="weather">
+				<h3>{{cast.dateTime}}</h3>
+				<img src="http://openweathermap.org/img/w/{{cast.conditionIcon}}.png" alt="{{cast.conditions}}">
+				<p>{{cast.tempAvg}}</p>
+				<div class="min-max">
+					<span>{{cast.tempMin}}</span>
+					<span>{{cast.tempMax}}</span>
+				</div>
+			</span>
+		</div>
+	</div>
+</div> -->
