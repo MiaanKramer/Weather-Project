@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface Location {
-  type: string;
-  cityId?: string;
-  lat?: number;
-  lng?: number;
-  zipCode?: string;
-  countryCode?: string;
-}
 
 @Component({
   selector: 'app-locations',

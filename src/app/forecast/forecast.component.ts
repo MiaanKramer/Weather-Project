@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Forecast } from '../forecast/forecast.component';
+import { Forecast } from '../weather.service';
 
-export interface Forecast {
-  dateTime: string;
-  tempMax: number;
-  tempAvg: number;
-  conditions: string;
-  conditionIcon: string;
-  windSpeed: number;
-  windDirection: number;
-}
+
 
 @Component({
   selector: 'app-forecast',

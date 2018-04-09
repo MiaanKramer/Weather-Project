@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { MatSidenavModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { APP_ROUTES } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 
 import { WeatherService } from './weather.service';
 import { SettingsService } from './settings.service';
@@ -28,13 +31,15 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule.forRoot(APP_ROUTES),
+    MatSidenavModule
   ],
   providers: [
-    WeatherService,
     SettingsService,
-    LocationsService
+    WeatherService,
+    LocationsService,
 
   ],
   bootstrap: [AppComponent]

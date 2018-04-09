@@ -1,33 +1,45 @@
 import { Injectable } from '@angular/core';
 import { all } from 'q';
 
-import { Settings } from './settings/settings.component';
-
 @Injectable()
-
 export class SettingsService {
 
-  	constructor() {  }
+	current: Settings;
+
+  	constructor() {
+		  this.current = this.read();
+	}
 
 	set(settings: Settings)	{
-		// set settings and save to local storage
+		this.current = settings;
+		this.save(this.current);
+	}
+
+	get(): Settings	{
+		return this.current;
+	}
+
+	private read(){
+		return {
+			apiKey: localStorage.getItem('apiKey'),
+			unitType: <any>localStorage.getItem('unitType')
+		};
+	}
+
+	private save(settings: Settings){
 		localStorage.setItem('apiKey', settings.apiKey);
 		localStorage.setItem('unittype', settings.unitType);
-	}	
-	get(): Settings	{
-		// get the current settings
-		var settings : Settings = {
-			apiKey: localStorage.getItem('apiKey'),
-			unitType: localStorage.getItem('unitType')
-		}
+	}
 
-		return settings;
-
-	}		
 	reset(): void	{
 		// reset settings to defaults
-		localStorage.setItem('settings', '24d09d88dd8b97951eeb4f7f56da91c5');
-		localStorage.setItem('unitType', '')
-	}			
+		localStorage.setItem('apiKey', '24d09d88dd8b97951eeb4f7f56da91c5');
+		localStorage.setItem('unitType', 'metric')
+	}
 
+}
+
+export interface Settings {
+	apiKey: string;
+	unitType: 'metric' | 'imperial';
 }
