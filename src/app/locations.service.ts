@@ -1,47 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Location } from './locations/locations.component';
 
-export interface Location {
-	type: string;		// ‘C’ for cityId, ‘G’ for coordinates, ‘Z’ for zipCode
-	cityId?: string;
-	lat?: number;
-	lng?: number;
-	zipCode?: string;
-	countryCode?: string;
-}
-
-
+import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class LocationsService {
 
-  constructor(private http: HttpClient) { 
+	Locations : Observable<Location[]>;
 
-  }
+	constructor() { }
 
-  addCityId(cityId: string): void {
+	addCityId(cityId: string) : void {
 
-  }
-		addCoordinates(lat: number, lng: number) : void {
 
-    }
-		addZipCode(zipCode: string, countryCode: string) : void {
+	}
 
-    }
-		add(loc: Location): void {
+	addCoordinates(lat: number, lng: number) : void {
 
-    }
-		remove(loc: Location): void {
+	}
 
-    }
-		all(): Location[] {
-      return;
-    }
+	addZipCode(zipCode: string, countryCode: string) : void {
 
-  
+	}
 
+	add(loc: Location) : void {
+
+	}
+
+	all() : Location[] {
+	return;
+	}
 }
-
-
-

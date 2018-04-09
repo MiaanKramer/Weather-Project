@@ -1,3 +1,11 @@
-<p>
-  settings works!
-</p>
+<div class="container">
+	<div class="settings">
+		<input type="text" data-ng-bind="this.settings.apiKey">
+		<label for="unit-type">
+			<input type="select" name="unit-type">
+			<option value="M"></option>
+			<option value="I"></option>
+		</label>
+		<button>Save</button>
+	</div>
+</div>

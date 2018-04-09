@@ -1,33 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 
-export interface Forecast {
-	datetime: string;		// date and time of forecast
-	tempMax: number;	// max temperature for the day [deg kelvin]
-	tempMin: number;	// min temperature for the day [deg kelvin]
-	tempAvg: number;	// avg temperature for the day [deg kelvin]
-	conditions: string;  	// description of weather condition
-	conditionIcon: string;   // the icon used to describe weather conditions
-	windSpeed: number;	   // wind speed [m/s]
-	windDirection: number;  // wind direction [degrees]
-}
+import { Forecast } from './forecast/forecast.component';
+import { Settings } from './settings/settings.component';
+import { Location } from './locations/locations.component';
+
+import { Observable } from 'rxjs';
+
 
 @Injectable()
 export class WeatherService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private settings: Settings) { }
+	forecast: Observable<Forecast[]>;
+	apiCall: string;
 
-	getForecastByCityId(cityId: string) : Observable<Forecast[]> {
-		return;
-	}
+	
+
 	getForecastByCoordinates(lat: number, lng: number): Observable<Forecast[]> {
-		return;
+		
+		this.apiCall = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lng + '&units=metric&id=524901&APPID=' + this.settings.apiKey;
+		this.http.get(this.apiCall).subscribe(data => {
+			
+		},
+		err => {
+			console.log('Error occured while loading data.')
+		}
+	);
+
+		return this.forecast;
+
 	}
-	getForecastByZipCode(zipCode: string): Observable<Forecast[]> {
-		return;
+	getForecastByZipCode(zipCode: string, countryCode: string): Observable<Forecast[]> {
+		this.apiCall = 'https://api.openweathermap.org/data/2.5/forecast?zip=' + zipCode + ',' + countryCode +  '&units=metric&id=524901&APPID=' + this.settings.apiKey;
+		this.http.get(this.apiCall).subscribe(data => {
+			
+		},
+		err => {
+			console.log('Error occured while loading data.')
+		}
+	);
+
+		return this.forecast;
 	}
 	getForecastByLocation(location: Location): Observable<Forecast[]> {
-		return;		
+		this.apiCall = 'https://api.openweathermap.org/data/2.5/forecast?zip=' + location.zipCode + ',' + location.countryCode +  '&units=metric&id=524901&APPID=' + this.settings.apiKey;
+		this.http.get(this.apiCall).subscribe(data => {
+			
+		},
+		err => {
+			console.log('Error occured while loading data.')
+		}
+	);
+
+		return this.forecast;
 	}
+
+	
 }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../settings.service';
 
+export interface Settings {
+  apiKey: string;
+  unitType: string;
+}
 
 @Component({
   selector: 'app-settings',
@@ -8,12 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public settingsService: SettingsService) {
+
+  }
+
+  
 
   ngOnInit() {
+    this.settingsService.get();
   }
 
 }
-
-
-
