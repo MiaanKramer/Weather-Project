@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule, MatButtonModule, MatToolbarModule, MatGridListModule, MatDividerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { APP_ROUTES } from './app-routing.module';
@@ -34,7 +35,13 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
-    MatSidenavModule
+    MatSidenavModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     SettingsService,

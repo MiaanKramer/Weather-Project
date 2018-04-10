@@ -1,16 +1,10 @@
-<!-- <div class="container">
-	<div*ngIf='settings.unitType=metric; then metric else imperial'>
-		<ng-template #metric>
-			<select name="unitType" id="unit">
-				<option value="metric" selected="selected">Metric</option>
-				<option value="Imperial">Imperial</option>
-			</select>
-		</ng-template>
-		<ng-template #imperial>
-			<select name="unitType" id="unit">
-				<option value="metric">Metric</option>
-				<option value="Imperial" selected="selected">Imperial</option>
-			</select>
-		</ng-template>
-	</div>
-</div> -->
+<h2>Settings</h2>
+<span>
+    <p>Api Key:</p>
+    <input type="text" value="{{settingsService.current.apiKey}}">
+    <p>Unit Type:</p>
+    <select name="unitType" id="units">
+        <option value="metric">Metric</option>
+        <option value="imperial">Imperial</option>
+    </select>
+</span>

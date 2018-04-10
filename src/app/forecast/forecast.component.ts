@@ -18,12 +18,4 @@ export class ForecastComponent implements OnInit {
 
 	}
 
-	changeForecast(direction: boolean, index: number) {
-		if (direction) {
-			// curreentForecast{} = forecasts[number + 1];
-		} else {
-			// curreentForecast{} = forecasts[number - 1];
-		}
-	}
-
 }

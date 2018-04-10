@@ -1,6 +1,15 @@
-<mat-sidenav-container>
-    <mat-sidenav></mat-sidenav>
+<mat-sidenav-container color="primary" autosize>
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" autosize color="primary">
+        Menu
+        <p><button mat-raised-button color="primary"><a href="home">Home</a></button></p>
+        <p><button mat-raised-button color="primary"><a href="locations">Locations</a></button></p>
+        <p><button mat-raised-button color="primary"><a href="settings">Settings</a></button></p>
+    </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+            <mat-toolbar color="primary">
+                <p id="toolbar">Toolbar</p>
+                <p><button id="toggle" mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Menu</button></p>
+            </mat-toolbar>
+            <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

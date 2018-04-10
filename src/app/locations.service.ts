@@ -8,15 +8,20 @@ export class LocationsService {
 
 	Locations : Observable<Location[]>;
 
-	constructor() { }
+	constructor() {
+		this.all();
+	 }
+
+	
 
 	addCityId(cityId: string) : void {
-
+		
 
 	}
 
 	addCoordinates(lat: number, lng: number) : void {
 
+		
 	}
 
 	addZipCode(zipCode: string, countryCode: string) : void {
@@ -28,7 +33,7 @@ export class LocationsService {
 	}
 
 	all() : Location[] {
-	return;
+		return;
 	}
 }
 

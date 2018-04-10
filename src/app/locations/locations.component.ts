@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationsService } from '../locations.service'; 
 
 
 @Component({
@@ -8,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationsComponent implements OnInit {
 
-  constructor() { }
+constructor(private locations: LocationsService) {}
 
-  ngOnInit() {
-  }
+ngOnInit() {
+}
 
 }

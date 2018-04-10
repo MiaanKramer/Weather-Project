@@ -11,6 +11,5 @@ export const APP_ROUTES: Routes = [
 	{path: 'home', component: HomeComponent},
 	{path: 'locations', component: LocationsComponent},
 	{path: 'settings', component: SettingsComponent},
-	{path: 'forecast', component: ForecastComponent},
-	{path: 'forecast/:cityId', component: ForecastComponent},
+	{path: 'forecast', component: ForecastComponent}
 ];

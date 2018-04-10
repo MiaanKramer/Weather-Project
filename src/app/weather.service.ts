@@ -8,6 +8,8 @@ import { Location } from './locations.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import { Pipe } from '@angular/core';
+
 
 @Injectable()
 export class WeatherService {
@@ -57,8 +59,6 @@ export class WeatherService {
 		let settings = this.settings.get();
 		let params = new HttpParams();
 
-		console.log('settings %o', settings);
-
 		params = params.append('appid', settings.apiKey);
 		params = params.append('units', settings.unitType);
 
@@ -69,8 +69,6 @@ export class WeatherService {
 
 		let url = `${WeatherService.BASE_URL}forecast`;
 
-		console.log(params.toString());
-		console.log(params.getAll('appid'));
 		return this.http.get<any>(url, {params: params})
 				   .map(results => {
 
