@@ -1,10 +1,23 @@
-<h2>Settings</h2>
-<span>
-    <p>Api Key:</p>
-    <input type="text" value="{{settingsService.current.apiKey}}">
-    <p>Unit Type:</p>
-    <select name="unitType" id="units">
-        <option value="metric">Metric</option>
-        <option value="imperial">Imperial</option>
-    </select>
-</span>
+
+<mat-card>
+    <!-- Settings of application displayed and edited here -->
+        <h1 class="display-1" style="text-align: left; color: #673ab7">Settings</h1>
+    <mat-form-field>
+        <!-- Displays current api key used to comune with the open weather map api -->
+        <input matInput [(ngModel)] = "settingsService.current.apiKey">
+        <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-select>
+            <!-- Takes in preferred units of measurement -->
+            <mat-option value="Imperial">Imperial</mat-option>
+            <mat-option value="Metric">Metric</mat-option>
+            <!-- Note: find way to display selected current settings -->
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <!-- Save button - Sends entered values to settings service to be saved to local storage -->
+    <button color="primary" mat-raised-button (click)="showAnswer()">Save</button>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+</mat-card>

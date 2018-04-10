@@ -1,15 +1,15 @@
-<mat-sidenav-container color="primary" autosize>
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" autosize color="primary">
-        Menu
-        <p><button mat-raised-button color="primary"><a href="home">Home</a></button></p>
-        <p><button mat-raised-button color="primary"><a href="locations">Locations</a></button></p>
-        <p><button mat-raised-button color="primary"><a href="settings">Settings</a></button></p>
-    </mat-sidenav>
-    <mat-sidenav-content>
-            <mat-toolbar color="primary">
-                <p id="toolbar">Toolbar</p>
-                <p><button id="toggle" mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Menu</button></p>
-            </mat-toolbar>
-            <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<mat-toolbar color="primary">
+<mat-toolbar-row>
+    <!-- removed sidenav and combined with toolbar since toolbar wasnt in 
+         use and was having trouble with sidenav not displaying correctly -->
+    <span>Weather Application</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary"><a href="home">Home</a></button>
+    <button mat-raised-button color="primary"><a href="locations">Locations</a></button>
+    <button mat-raised-button color="primary"><a href="settings">Settings</a></button>
+    <!-- toolbar layout with link buttons to go between pages -->
+</mat-toolbar-row>
+</mat-toolbar>
+<!-- Everything above is present on every page except for the router oulet 
+     which is the router sending back a component to display in that area -->
+<router-outlet></router-outlet>

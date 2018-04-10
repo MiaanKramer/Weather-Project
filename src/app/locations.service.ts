@@ -2,15 +2,30 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { LocationsComponent } from './locations/locations.component';
+
+export interface Location {
+	type: 'coordinates' | 'zipcode' | 'city_id';
+	cityName?: string;
+	cityId?: string;
+	lat?: string;
+	lng?: string;
+	zipCode?: string;
+	countryCode?: string;
+}
+
 
 @Injectable()
 export class LocationsService {
 
+
 	Locations : Observable<Location[]>;
 
 	constructor() {
-		this.all();
+
 	 }
+
+
 
 	
 
@@ -30,19 +45,12 @@ export class LocationsService {
 
 	add(loc: Location) : void {
 
+
 	}
 
-	all() : Location[] {
+	all() : Location[]{
 		return;
 	}
 }
 
-export interface Location {
-	type: 'coordinates' | 'zipcode' | 'city_id';
-	cityName?: string;
-	cityId?: string;
-	lat?: string;
-	lng?: string;
-	zipCode?: string;
-	countryCode?: string;
-}
+

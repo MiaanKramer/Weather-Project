@@ -18,4 +18,20 @@ export class SettingsComponent implements OnInit {
 	this.settingsService.get();
   }
 
+  answer: string = '';
+  answerDisplay: string = '';
+  showSpinner: boolean = false;
+
+
+  // basic spinner to simulate loading but no loading 
+  // will be present since im working with local storage
+  showAnswer() {
+    this.showSpinner = true;
+
+    setTimeout(() => {
+      this.answerDisplay = this.answer;
+      this.showSpinner = false;
+    }, 2000);
+  }
+
 }
