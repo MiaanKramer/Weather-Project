@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatSidenavModule, MatButtonModule, MatToolbarModule,
          MatGridListModule, MatDividerModule, MatFormFieldModule,
          MatInputModule, MatCardModule, MatMenuModule, MatIconModule,
-         MatProgressSpinnerModule, MatSelectModule} from '@angular/material';
+         MatProgressSpinnerModule, MatSelectModule, MatCheckboxModule, MatDialogModule, matDialogAnimations} from '@angular/material';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -52,7 +52,9 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [
     SettingsService,

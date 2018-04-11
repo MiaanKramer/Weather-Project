@@ -1,23 +1,31 @@
-
-<mat-card>
-    <!-- Settings of application displayed and edited here -->
-        <h1 class="display-1" style="text-align: left; color: #673ab7">Settings</h1>
-    <mat-form-field>
-        <!-- Displays current api key used to comune with the open weather map api -->
-        <input matInput [(ngModel)] = "settingsService.current.apiKey">
-        <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-        <mat-select>
-            <!-- Takes in preferred units of measurement -->
-            <mat-option value="Imperial">Imperial</mat-option>
-            <mat-option value="Metric">Metric</mat-option>
-            <!-- Note: find way to display selected current settings -->
-        </mat-select>
-    </mat-form-field>
-    <br>
-    <!-- Save button - Sends entered values to settings service to be saved to local storage -->
-    <button color="primary" mat-raised-button (click)="showAnswer()">Save</button>
-    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-</mat-card>
+<div layout="row" layout-align="center start">
+    <mat-card>
+        <!-- Settings of application displayed and edited here -->
+            <mat-card-title>
+                <h1 class="display-1" style="text-align: left; color: #673ab7">Settings</h1>
+            </mat-card-title>
+        <mat-card-content>
+            <mat-form-field>
+                <!-- Displays current api key used to comune with the open weather map api -->
+                <input matInput [(ngModel)] = "settings.apiKey">
+                <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-select [(ngModel)] = "settings.unitType">
+                    <!-- Takes in preferred units of measurement -->
+                    <mat-option required value="imperial">Imperial</mat-option>
+                    <mat-option value="metric">Metric</mat-option>
+                    <!-- Note: find way to display selected current settings -->
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+          
+        <mat-card-actions>
+            <!-- Save button - Sends entered values to settings service to be saved to local storage -->
+            <button color="primary" mat-raised-button (click)="save()">Save</button>
+            <!-- Reset button restores default settings incase errors were made -->
+            <button color="primary" mat-raised-button (click)="reset()">Reset</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

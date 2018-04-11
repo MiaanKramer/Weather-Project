@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { LocationsService } from '../locations.service'; 
+import { Component, OnInit, ComponentFactory} from '@angular/core';
+import { LocationsService, Location } from '../locations.service'; 
 import { LocationModalComponent } from '../location-modal/location-modal.component';
+import { Observable } from 'rxjs';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 
 @Component({
   selector: 'app-locations',
@@ -9,8 +12,36 @@ import { LocationModalComponent } from '../location-modal/location-modal.compone
 })
 export class LocationsComponent implements OnInit {
 
-constructor() {}
+  locationsSubject: Observable<Location[]>;
+
+constructor(private locations: LocationsService, public dialog: MatDialog) {}
+
+editing: boolean = false;;
 
 ngOnInit() {
+  this.locationsSubject = this.locations.observe();
 }
+
+addLocation() {
+	let ranLat = Math.random().toString();
+	let ranLng = Math.random().toString();
+
+	this.locations.add({
+		type: 'coordinates',
+		lat: ranLat,
+		lng: ranLng
+	});
+
+	this.locations.save();
+}
+
+delete(index) {
+	this.locations.delete(index);
+}
+
+edit(index): void {
+	
+}
+
+
 }

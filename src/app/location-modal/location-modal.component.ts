@@ -5,9 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './location-modal.component.html',
   styleUrls: ['./location-modal.component.scss']
 })
-export class LocationModalComponent implements OnInit {
 
-  
+export class LocationModalComponent implements OnInit {
 
   constructor() {
     
@@ -15,8 +14,5 @@ export class LocationModalComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  
-
 
 }

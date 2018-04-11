@@ -4,10 +4,10 @@ import { all } from 'q';
 @Injectable()
 export class SettingsService {
 
-	current: Settings;
+	private current: Settings;
 
   	constructor() {
-		  this.current = this.read();
+		this.current = this.read();
 	}
 
 	set(settings: Settings)	{
@@ -16,25 +16,25 @@ export class SettingsService {
 	}
 
 	get(): Settings	{
-		return this.current;
+		return Object.assign({}, this.current);
 	}
 
 	private read(){
-		return {
-			apiKey: localStorage.getItem('apiKey'),
-			unitType: <any>localStorage.getItem('unitType')
-		};
+		return JSON.parse(localStorage.getItem("settings"));
 	}
 
 	private save(settings: Settings){
-		localStorage.setItem('apiKey', settings.apiKey);
-		localStorage.setItem('unittype', settings.unitType);
+		this.current = settings;
+		localStorage.setItem("settings", JSON.stringify(settings));
 	}
 
-	reset(): void	{
+	reset(): void {
 		// reset settings to defaults
-		localStorage.setItem('apiKey', '24d09d88dd8b97951eeb4f7f56da91c5');
-		localStorage.setItem('unitType', 'metric')
+		localStorage.setItem("settings", JSON.stringify({
+			apiKey: '24d09d88dd8b97951eeb4f7f56da91c5',
+			unitType: 'metric'
+		}));
+		this.current = this.read();
 	}
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WeatherService } from '../weather.service';
-import {LocationsService} from '../locations.service';
+import { LocationsService, Location } from '../locations.service';
+
 
 
 @Component({
@@ -11,10 +12,18 @@ import {LocationsService} from '../locations.service';
 })
 export class HomeComponent implements OnInit {
 
+    
+
     constructor(private weather: WeatherService) { }
 
     ngOnInit() {
+
+      
+
     }
+
+
+    
 
 
 
