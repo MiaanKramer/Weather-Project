@@ -16,7 +16,8 @@ export class LocationsComponent implements OnInit {
 
 constructor(private locations: LocationsService, public dialog: MatDialog) {}
 
-editing: boolean = false;
+selectedLocation: Location;
+
 
 ngOnInit() {
   this.locationsSubject = this.locations.observe();
@@ -37,9 +38,14 @@ delete(index) {
 }
 
 edit(index): void {
+	this.selectedLocation = this.locationsSubject[index];
 
 	this.locations.save();
 }
+
+cancel(index): void {
+	this.locationsSubject[index] = this.selectedLocation;
+}	
 
 
 }

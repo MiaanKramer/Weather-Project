@@ -1,0 +1,20 @@
+<div>
+    <h2 mat-dialog-title>Edit Location</h2>
+    <mat-dialog-content>
+        <input matInput [(ngModel)] = "Location.type">
+        <!-- Every location has a type but not every location is given coordinates of cityId and so on -->
+        <mat-form-field matInput *ngIf="loc.type == 'coordinates'" placeholder="Coordinates">
+            <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
+                <input placeholder="Lat" matInput [(ngModel)] = "loc.lat">
+                <input placeholder="Lng" matInput [(ngModel)] = "loc.lng">
+        </mat-form-field>
+        <div *ngIf="loc.type == 'zipcode'" placeholder="Zip Code">
+                <input matInput [(ngModel)] = "loc.zipCode">
+        </div>
+        <div *ngIf="loc.type == 'city_id'" placeholder="City ID">
+                <input matInput [(ngModel)] = "loc.cityId">
+        </div>
+
+
+    </mat-dialog-content>
+</div>

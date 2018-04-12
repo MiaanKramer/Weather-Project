@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
       
     }
 
-    locations: Location[];
+    locations: LocalWeather[];
 
     ngOnInit() {
       this.read();
@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
     }
 
     read() {
-      this.locations = this.location.all();
 
       this.locations.forEach(loc => {
         if(loc.type == "coordinates") {

@@ -62,7 +62,7 @@ export class WeatherService {
 		params = params.append('appid', settings.apiKey);
 		params = params.append('units', settings.unitType);
 
-		if(location.type == 'coordinates'){
+		if (location.type == 'coordinates') {
 			params = params.append('lat', location.lat);
 			params = params.append('lon', location.lng);
 		}

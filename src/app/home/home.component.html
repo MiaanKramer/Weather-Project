@@ -1,7 +1,7 @@
-<mat-card *ngFor="let loc of locations">
-
-    <mat-card *ngFor="let cast of forecasts">
-
-    </mat-card>
-
-</mat-card>
+<h1 class="display-1" style="text-align: left; color: #673ab7">Forecasts</h1>
+    <div *ngFor="let loc of locations" flex="20">
+        <mat-card *ngFor="let cast of forecasts">
+            {{loc}}
+        </mat-card>
+    
+    </div>
