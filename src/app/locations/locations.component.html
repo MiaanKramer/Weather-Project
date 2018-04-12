@@ -8,14 +8,9 @@
                 Lng: {{loc.lng}}
             </div>
             <mat-card-actions>
-                <button mat-raised-button color="primary" class="material-icons" (click)="openDialog()">Edit</button>
+                <button mat-raised-button color="primary" class="material-icons" (click)="openDialog(i)">Edit</button>
                 <button mat-raised-button color="primary" class="material-icons" (click)="delete(i)" >Delete</button>
             </mat-card-actions>
-    </mat-card>
-    <mat-card *ngIf="edit">
-        <mat-select>
-            
-        </mat-select>
     </mat-card>
     <mat-card-actions>
         <button mat-button (click)="addLocation()" color="primary">Add Location</button>

@@ -69,7 +69,7 @@ export class WeatherService {
 
 		let url = `${WeatherService.BASE_URL}forecast`;
 
-		return this.http.get<any>(url, {params: params})
+		return this.http.get<any>(url, {params: params}) 
 				   .map(results => {
 
 						let localWeather: LocalWeather = {

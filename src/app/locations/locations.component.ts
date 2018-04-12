@@ -16,23 +16,20 @@ export class LocationsComponent implements OnInit {
 
 constructor(private locations: LocationsService, public dialog: MatDialog) {}
 
-editing: boolean = false;;
+editing: boolean = false;
 
 ngOnInit() {
   this.locationsSubject = this.locations.observe();
 }
 
-addLocation() {
-	let ranLat = Math.random().toString();
-	let ranLng = Math.random().toString();
-
-	this.locations.add({
-		type: 'coordinates',
-		lat: ranLat,
-		lng: ranLng
-	});
-
-	this.locations.save();
+addLocation(location: Location) {
+	if(location.type == "coordinates") {
+		this.locations.addCoordinates(location.lat, location.lng);
+	} else if(location.type == "city_id") {
+		this.locations.addCityId(location.cityId);
+	} else if (location.type == "zipcode") {
+		this.locations.addZipCode(location.zipCode, location.countryCode);
+	}
 }
 
 delete(index) {
@@ -40,7 +37,8 @@ delete(index) {
 }
 
 edit(index): void {
-	
+
+	this.locations.save();
 }
 
 

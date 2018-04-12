@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-location-modal',
@@ -13,6 +14,7 @@ export class LocationModalComponent implements OnInit {
   }
 
   ngOnInit() {
+  
   }
 
 }

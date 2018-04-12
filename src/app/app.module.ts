@@ -22,7 +22,6 @@ import { LocationsService } from './locations.service';
 import { SettingsComponent } from './settings/settings.component';
 import { LocationsComponent } from './locations/locations.component';
 import { HomeComponent } from './home/home.component';
-import { ForecastComponent } from './forecast/forecast.component';
 import { LocationModalComponent } from './location-modal/location-modal.component';
 
 
@@ -32,7 +31,6 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
     SettingsComponent,
     LocationsComponent,
     HomeComponent,
-    ForecastComponent,
     LocationModalComponent,
   ],
   imports: [

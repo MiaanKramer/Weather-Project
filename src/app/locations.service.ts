@@ -19,7 +19,7 @@ export interface Location {
 export class LocationsService {
 
 	genericLocation: Location = {
-		
+
 		cityId: "London, GB",
 		cityName: "London",
 		countryCode: "44",
@@ -35,9 +35,7 @@ export class LocationsService {
 	private location = Location;
 
 	constructor() {
-
 		this.read();
-
 	 }
 
 	read() {
@@ -49,17 +47,32 @@ export class LocationsService {
 
 
 	addCityId(cityId: string) : void {
-		
+		let location: Location = {
+			type: "city_id",
+			cityId: cityId
+		}
+		this.locationsSubject.value.push(location);
 		this.save();
 	}
 
-	addCoordinates(lat: number, lng: number) : void {
-
+	addCoordinates(lat: string, lng: string) : void {
+		let location: Location = {
+			type: "coordinates",
+			lat: lat,
+			lng: lng
+		}
+		this.locationsSubject.value.push(location);
 		this.save();
 	}
 
 	addZipCode(zipCode: string, countryCode: string) : void {
 
+		let location: Location  = {
+			type: "zipcode",
+			zipCode: zipCode,
+			countryCode: countryCode
+		}
+		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
 	}
