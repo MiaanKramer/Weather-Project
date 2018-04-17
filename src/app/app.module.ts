@@ -58,8 +58,8 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
     SettingsService,
     WeatherService,
     LocationsService,
-
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LocationModalComponent]
 })
 export class AppModule { }

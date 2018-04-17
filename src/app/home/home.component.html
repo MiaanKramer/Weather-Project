@@ -1,7 +1,25 @@
 <h1 class="display-1" style="text-align: left; color: #673ab7">Forecasts</h1>
-    <div *ngFor="let loc of locations" flex="20">
-        <mat-card *ngFor="let cast of forecasts">
-            {{loc}}
-        </mat-card>
-    
+<!-- divs formed by other child divs containing the forecasts for one spesific location -->
+    <div *ngIf="localWeather">
+        <div *ngFor="let loc of localWeather" flex="20">
+            <div *ngIf="loc | async as loc">
+                {{loc.type}}
+                <div *ngFor="let cast of forecasts">
+                    <mat-card>
+                        {{cast.dataTime}}
+                        <br>
+                        <!-- Gathering each image based on their condition Icon -->
+                        <img mat-card-image src="http://openweathermap.org/img/w/{{cast.conditionIcon}}" alt="{{cast.condition}}">
+                        <mat-card-actions>
+                            <span>{{cast.avgTemp}}</span>
+                            <span>{{cast.consition}}</span>
+                        </mat-card-actions>
+                        <mat-card-footer>
+                            <span>{{cast.minTemp}}</span>
+                            <span>{{cast.maxTemp}}</span>
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
     </div>

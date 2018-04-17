@@ -21,6 +21,16 @@ export class WeatherService {
 		private settings: SettingsService
 	){}
 
+	typeSorter(location: Location) {
+		if(location.type == "coordinates") {
+			return this.getForecastByCoordinates(location.lat, location.lng);
+		} else if(location.type == "city_id") {
+			return this.getForecastByCityId(location.cityId);
+		} else if(location.type == "zipcode") {
+			return this.getForecastByZipCode(location.zipCode, location.countryCode);
+		}
+	}
+
 	getForecastByCoordinates(lat: string, lng: string): Observable<LocalWeather> {
 
 		let location: Location = {
@@ -43,7 +53,7 @@ export class WeatherService {
 	getForecastByCityId(cityId: string): Observable<LocalWeather> {
 
 		let location: Location = {
-			type: 'city_id',
+			type: 'city_id'
 		};
 
 		return this.requestForecast(location);
@@ -57,17 +67,33 @@ export class WeatherService {
 	private requestForecast(location: Location){
 
 		let settings = this.settings.get();
+
+		//  creating paramaters to be passed into the http request to refine search results
 		let params = new HttpParams();
+
+		// setting the settings of the api request according to the save settings in the settings component
 
 		params = params.append('appid', settings.apiKey);
 		params = params.append('units', settings.unitType);
 
+
+
+
+		// adding more params to the api request based on the location type to get spesific location based on three values
 		if (location.type == 'coordinates') {
 			params = params.append('lat', location.lat);
 			params = params.append('lon', location.lng);
+			// adding params based on coordinates
+		} else if (location.type == 'zipcode') {
+			params = params.append('zip', location.zipCode)
+			// adding params based on zipcode
+		} else if(location.type == 'city_id') {
+			params = params.append('id', location.cityId);
+			// adding params based on city_id
 		}
 
 		let url = `${WeatherService.BASE_URL}forecast`;
+		
 
 		return this.http.get<any>(url, {params: params}) 
 				   .map(results => {

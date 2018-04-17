@@ -1,36 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
+import { LocationsService, Location} from '../locations.service';
+import { Observable } from 'rxjs';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-location-modal',
   templateUrl: './location-modal.component.html',
   styleUrls: ['./location-modal.component.scss']
+
 })
 
 export class LocationModalComponent implements OnInit {
 
-  constructor() {
-    
-  }
+  constructor(private LocationService: LocationsService, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  locations: Observable<Location[]>;
 
+  location: Location = {
+    type: "coordinates",
+  };
+
+  select: string = "coordinates";
   
   ngOnInit() {
-  
+    this.read();
   }
 
-  // Basic dialog opener
-  openDialog(index) {
-    // create a new dialog with layout provided by the locationModalCOmpoonent
-    let dialogRef = this.dialog.open(LocationModalComponent, {
-      // the data which the dialog uses it passed to it within this object
-      width: "600px",
-      data: location[index]
-    });
+  add(location: Location) {
+    if(location.type == "coordinates") {
+      this.LocationService.addCoordinates(location.lat, location.lng);
+    }
+    if(location.type == "zipcode") {
+      this.LocationService.addZipCode(location.cityId, location.countryCode);
+    }
+    if(location.type == "city_id") {
+      this.LocationService.addCityId(location.cityId);
+    }
+  }
 
-    // results retrieved from dialog with be 
-    //retrieved and sent to this function which will then produce a console.log to display information
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-    });
+  read() {
+    this.locations = this.LocationService.observe();
+  }
+}
+
+@Component({
+  selector: 'app-local-modal-edit',
+  template: '',
+  styleUrls: ['./location-modal.component.scss']
+
+})
+
+export class LocationModalEditComponent implements OnInit {
+  constructor(){}
+
+  ngOnInit() {
+
+  }
+}
+
+@Component({
+  selector: 'app-local-modal-add',
+  template: '',
+  styleUrls: ['./location-modal.component.scss']
+
+})
+
+export class LocationModalAddComponent implements OnInit {
+  constructor(){}
+
+  ngOnInit() {
+    
   }
 }

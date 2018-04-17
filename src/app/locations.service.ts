@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { LocationsComponent } from './locations/locations.component';
 
 export interface Location {
+
 	type: 'coordinates' | 'zipcode' | 'city_id';
 	cityName?: string;
 	cityId?: string;
@@ -12,6 +13,7 @@ export interface Location {
 	lng?: string;
 	zipCode?: string;
 	countryCode?: string;
+
 }
 
 
@@ -19,7 +21,6 @@ export interface Location {
 export class LocationsService {
 
 	genericLocation: Location = {
-
 		cityId: "London, GB",
 		cityName: "London",
 		countryCode: "44",
@@ -30,51 +31,81 @@ export class LocationsService {
 
 	}
 
+
+
 	private locationsSubject = new BehaviorSubject<Location[]>([]);
 
 	private location = Location;
 
 	constructor() {
+
 		this.read();
-	 }
+		localStorage.setItem("locations", JSON.stringify(this.genericLocation));
+	 
+	}
 
 	read() {
 
-		this.locationsSubject.next(JSON.parse(localStorage.getItem("locations")));
-		this.save();
+		let storage = JSON.parse(localStorage.getItem("locations"));
+
+		if(storage) {
+			this.locationsSubject.value.push(storage);
+			this.locationsSubject.next(this.locationsSubject.value);
+		} else {
+			this.locationsSubject.next([]);
+		}
+
+		this.add(this.genericLocation);
+		
 
 	}
 
 
 	addCityId(cityId: string) : void {
+
 		let location: Location = {
+
 			type: "city_id",
 			cityId: cityId
+
 		}
+	
 		this.locationsSubject.value.push(location);
+		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
+
 	}
 
 	addCoordinates(lat: string, lng: string) : void {
+
 		let location: Location = {
+
 			type: "coordinates",
 			lat: lat,
 			lng: lng
+
 		}
+
 		this.locationsSubject.value.push(location);
+		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
+
 	}
 
 	addZipCode(zipCode: string, countryCode: string) : void {
 
 		let location: Location  = {
+
 			type: "zipcode",
 			zipCode: zipCode,
 			countryCode: countryCode
+
 		}
+
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
+
 	}
 
 	add(location: Location) : void {
@@ -82,6 +113,7 @@ export class LocationsService {
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
+		
 	}
 
 	all() : Location[]{

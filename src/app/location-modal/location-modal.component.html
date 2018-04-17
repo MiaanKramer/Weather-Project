@@ -1,20 +1,36 @@
 <div>
-    <h2 mat-dialog-title>Edit Location</h2>
+    <h3 mat-dialog-title>Add Location</h3>
     <mat-dialog-content>
-        <input matInput [(ngModel)] = "Location.type">
+        <select matInput [(ngModel)] = "location.type">
+            <option value="coordinates">Coordinates</option>
+            <option value="zipcode">Zip Code</option>
+            <option value="city_id">City ID</option>
+        </select>
+        <br>
         <!-- Every location has a type but not every location is given coordinates of cityId and so on -->
-        <mat-form-field matInput *ngIf="loc.type == 'coordinates'" placeholder="Coordinates">
-            <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
-                <input placeholder="Lat" matInput [(ngModel)] = "loc.lat">
-                <input placeholder="Lng" matInput [(ngModel)] = "loc.lng">
-        </mat-form-field>
-        <div *ngIf="loc.type == 'zipcode'" placeholder="Zip Code">
-                <input matInput [(ngModel)] = "loc.zipCode">
+        <div *ngIf="select == 'coordinates'">
+                <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
+            <br>
+                <input placeholder="Lat" matInput required [(ngModel)]="location.lat">
+            <br>
+                <input placeholder="Lng" matInput required [(ngModel)]="location.lng">
+            <br>
         </div>
-        <div *ngIf="loc.type == 'city_id'" placeholder="City ID">
-                <input matInput [(ngModel)] = "loc.cityId">
+        <div *ngIf="select == 'zipcode'">
+            <br>
+                <input matInput required placeholder="Zip Code" [(ngModel)]="location.zipcode">
+            <br>
+                <input matInput required placeholder="Country Code" [(ngModel)]="location.Country">
+            <br>
         </div>
-
-
+        <div *ngIf="select == 'city_id'">
+            <br>
+                <input matInput required placeholder="City ID" [(ngModel)]="location.city_id">
+            <br>
+        </div>
+            <mat-dialog-actions>
+                <button mat-button color="primary" (click)="add(dialogResult)">ADD</button>
+                <button mat-button color="primary">CANCEL</button>
+            </mat-dialog-actions>
     </mat-dialog-content>
 </div>
