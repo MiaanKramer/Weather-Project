@@ -21,16 +21,6 @@ export class WeatherService {
 		private settings: SettingsService
 	){}
 
-	typeSorter(location: Location) {
-		if(location.type == "coordinates") {
-			return this.getForecastByCoordinates(location.lat, location.lng);
-		} else if(location.type == "city_id") {
-			return this.getForecastByCityId(location.cityId);
-		} else if(location.type == "zipcode") {
-			return this.getForecastByZipCode(location.zipCode, location.countryCode);
-		}
-	}
-
 	getForecastByCoordinates(lat: string, lng: string): Observable<LocalWeather> {
 
 		let location: Location = {
@@ -98,18 +88,16 @@ export class WeatherService {
 		return this.http.get<any>(url, {params: params}) 
 				   .map(results => {
 
-						let localWeather: LocalWeather = {
-							type: location.type,
+						let localWeather: LocalWeather = Object.assign({
 							cityName: results.city.name,
 							cityId: results.city.id,
 							lat: results.city.coord.lat,
 							lng: results.city.coord.lon,
-							zipCode: location.zipCode,
-							countryCode: location.countryCode,
 							forecasts: []
-						};
+						},);
 
 						localWeather.forecasts = results.list.map(result => {
+							
 							return {
 								dateTime: result.dt_txt,
 								tempMin: result.main.temp_min,

@@ -99,7 +99,6 @@ export class LocationsService {
 			type: "zipcode",
 			zipCode: zipCode,
 			countryCode: countryCode
-
 		}
 
 		this.locationsSubject.value.push(location);
