@@ -20,28 +20,20 @@ export interface Location {
 @Injectable()
 export class LocationsService {
 
-	genericLocation: Location = {
-		cityId: "London, GB",
-		cityName: "London",
-		countryCode: "44",
-		lat: "51.5085",
-		lng: "-0.1258",
-		type: "coordinates",
-		zipCode: "EC2V 8EX"
+	private locationsSubject = new BehaviorSubject<Location[]>([]);
+
+	private full = false;
+	constructor() {
+		this.read();
+
+		if(this.locationsSubject.value.length > 0) {
+			this.full = true;
+		}
 
 	}
 
-
-
-	private locationsSubject = new BehaviorSubject<Location[]>([]);
-
-	private location = Location;
-
-	constructor() {
-
-		this.read();
-		localStorage.setItem("locations", JSON.stringify(this.genericLocation));
-	 
+	replace(index: number, location: Location) {
+		this.locationsSubject[index].value = location;
 	}
 
 	read() {
@@ -54,12 +46,14 @@ export class LocationsService {
 		} else {
 			this.locationsSubject.next([]);
 		}
-
-		this.add(this.genericLocation);
-		
-
 	}
 
+	clear() {
+		localStorage.setItem("locations", null);
+		console.log(this.locationsSubject.value);
+
+		this.read();
+	}
 
 	addCityId(cityId: string) : void {
 
@@ -83,7 +77,6 @@ export class LocationsService {
 			type: "coordinates",
 			lat: lat,
 			lng: lng
-
 		}
 
 		this.locationsSubject.value.push(location);
@@ -112,18 +105,19 @@ export class LocationsService {
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
+
+		if(this.locationsSubject.value.length > 0) {
+			this.full = true;
+		} else {
+			this.full = false;
+		}
 		
-	}
-
-	all() : Location[]{
-
-		return JSON.parse(localStorage.getItem("locations"));
-
 	}
 
 	save() {
 
 		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
+		this.read();
 
 	}
 
@@ -136,7 +130,15 @@ export class LocationsService {
 	delete(index) {
 
 		this.locationsSubject.value.splice(index, 1);
+		console.log(this.locationsSubject.value);
 		this.save();
+
+		if(this.locationsSubject.value.length > 0) {
+			this.full = true;
+		} else {
+			this.full = false;
+		}
+
 
 	}
 }

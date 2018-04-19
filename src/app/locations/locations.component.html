@@ -1,5 +1,6 @@
 <mat-card>
     <h1 class="display-1" style="text-align: left; color: #673ab7">Locations</h1>
+    <div *ngIf="full">
         <mat-card *ngFor="let loc of (locationsSubject | async); index as i">
             <div class="location">
                 {{i + 1}}
@@ -12,9 +13,16 @@
                 <button mat-raised-button color="primary" class="material-icons" (click)="delete(i)" >Delete</button>
             </mat-card-actions>
         </mat-card>
+    </div>
+    <span *ngIf="adding">
+        <div *ngIf="selectedLocation.type == 'coordinates'">
+
+        </div>
+    </span>
     <mat-card-actions>
-            <button mat-button (click)="addGeneric()" color="primary">Add Location</button>
-        </mat-card-actions>
+        <button mat-button (click)="addGeneric()" color="primary">Add Location</button>
+        <button mat-button (click)="clear()" color="primary">Clear Locations</button>
+</mat-card-actions>
 </mat-card>
     
     

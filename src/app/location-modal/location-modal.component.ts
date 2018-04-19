@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import { LocationsService, Location} from '../locations.service';
 import { Observable } from 'rxjs';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-location-modal',
@@ -20,5 +20,10 @@ export class LocationModalComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  ngOnInit() {
+    console.log(this.data);
+  }
+  
 
 }

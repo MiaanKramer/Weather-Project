@@ -2,7 +2,7 @@ import { Component, OnInit, ComponentFactory, Inject} from '@angular/core';
 import { LocationsService, Location } from '../locations.service'; 
 import { LocationModalComponent } from '../location-modal/location-modal.component';
 import { Observable } from 'rxjs';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { locateHostElement } from '@angular/core/src/render3/instructions';
 
 
@@ -19,18 +19,32 @@ export class LocationsComponent implements OnInit {
 
 	constructor(private locations: LocationsService, public dialog: MatDialog) {}
 
-    selectedLocation: Location;
-    
-    dialogRef;
+		selectedLocation: Location;
+		
+		edit = false;
+
+		
+
+    genericLocation: Location = {
+		type: 'coordinates',
+		lat: '50.25',
+		lng: '16.25'
+	}
+
+	addGeneric() {
+		this.locations.add(this.genericLocation);
+		this.locationsSubject.map(location => {
+			console.log(location);
+		});
+	}
 
 	ngOnInit() {
 		this.locationsSubject = this.locations.observe();
 		
 	}
 
-	addGeneric() {
-		this.locations.add(this.locations.genericLocation);
-		this.locations.save();
+	clear() {
+		this.locations.clear();
 	}
 
 	addLocation(location: Location) {
@@ -40,31 +54,40 @@ export class LocationsComponent implements OnInit {
 			this.locations.addCityId(location.cityId);
 		} else if (location.type == "zipcode") {
 			this.locations.addZipCode(location.zipCode, location.countryCode);
-		}
+        }
+    
 	}
 
 	delete(index) {
 		this.locations.delete(index);
-	}
+	}   
 
-	cancel(index): void {
-		this.locationsSubject[index] = this.selectedLocation;
-    }	
-    
-    
+    openEdit(index): void {
+				this.edit = true;
 
-    openDialog(index): void {
-        this.selectedLocation = this.locationsSubject[index];
-
-        console.log(this.selectedLocation);
+				this.selectedLocation = this.locationsSubject[index];
+				
         let dialogRef = this.dialog.open(LocationModalComponent, {
           width: '325px',
+          height: '500px',
           data: this.selectedLocation
         });
     
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The locartion has been saved');
-          this.locations.add(result);
+					this.locations.replace(index, this.selectedLocation);          
         });
-      }
+			}
+			
+		openAdd(): void {
+			this.edit = false;
+
+			let dialogRef = this.dialog.open(LocationModalComponent, {
+				width: '325px',
+				height: '500px'
+			});
+
+			dialogRef.afterClosed().subscribe(result => {
+				this.locations.add(this.selectedLocation);
+			});
+		}
 }

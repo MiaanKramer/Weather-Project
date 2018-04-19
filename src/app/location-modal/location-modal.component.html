@@ -1,36 +1,36 @@
 <div>
     <h3 mat-dialog-title>Add Location</h3>
     <mat-dialog-content>
-        <select matInput [(ngModel)] = "location.type">
+        <select matInput [(ngModel)] = "data.type">
             <option value="coordinates">Coordinates</option>
             <option value="zipcode">Zip Code</option>
             <option value="city_id">City ID</option>
         </select>
         <br>
         <!-- Every location has a type but not every location is given coordinates of cityId and so on -->
-        <div *ngIf="select == 'coordinates'">
+        <div *ngIf="data.type == 'coordinates'">
                 <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
             <br>
-                <input placeholder="Lat" matInput required [(ngModel)]="location.lat">
+                <input placeholder="Lat" matInput required [(ngModel)]="data.lat">
             <br>
-                <input placeholder="Lng" matInput required [(ngModel)]="location.lng">
-            <br>
-        </div>
-        <div *ngIf="select == 'zipcode'">
-            <br>
-                <input matInput required placeholder="Zip Code" [(ngModel)]="location.zipcode">
-            <br>
-                <input matInput required placeholder="Country Code" [(ngModel)]="location.Country">
+                <input placeholder="Lng" matInput required [(ngModel)]="data.lng">
             <br>
         </div>
-        <div *ngIf="select == 'city_id'">
+        <div *ngIf="data.type == 'zipcode'">
             <br>
-                <input matInput required placeholder="City ID" [(ngModel)]="location.city">
+                <input matInput required placeholder="Zip Code" [(ngModel)]="data.zipcode">
+            <br>
+                <input matInput required placeholder="Country Code" [(ngModel)]="data.Country">
+            <br>
+        </div>
+        <div *ngIf="data.type == 'city_id'">
+            <br>
+                <input matInput required placeholder="City ID" [(ngModel)]="data.city">
             <br>
         </div>
             <mat-dialog-actions>
-                <button mat-button color="primary" (click)="add(dialogResult)">ADD</button>
-                <button mat-button color="primary">CANCEL</button>
+                <button mat-button color="primary">ADD</button>
+                <button mat-button color="primary" (click)="onNoCLick()" cdkFocusInitial>CANCEL</button>
             </mat-dialog-actions>
     </mat-dialog-content>
 </div>
