@@ -9,7 +9,7 @@
                 Lng: {{loc.lng}}
             </div>
             <mat-card-actions>
-                <button mat-raised-button color="primary" class="material-icons" (click)="openDialog(i)">Edit</button>
+                <button mat-raised-button color="primary" class="material-icons" (click)="openEdit(i)">Edit</button>
                 <button mat-raised-button color="primary" class="material-icons" (click)="delete(i)" >Delete</button>
             </mat-card-actions>
         </mat-card>
@@ -20,7 +20,7 @@
         </div>
     </span>
     <mat-card-actions>
-        <button mat-button (click)="addGeneric()" color="primary">Add Location</button>
+        <button mat-button (click)="openAdd()" color="primary">Add Location</button>
         <button mat-button (click)="clear()" color="primary">Clear Locations</button>
 </mat-card-actions>
 </mat-card>

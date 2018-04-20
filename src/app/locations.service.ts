@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -17,23 +17,30 @@ export interface Location {
 }
 
 
+
+
+
 @Injectable()
 export class LocationsService {
 
 	private locationsSubject = new BehaviorSubject<Location[]>([]);
 
-	private full = false;
-	constructor() {
+	constructor() { }
+
+	loc: Location = {
+		type: 'zipcode',
+		zipCode: '7646'
+	}
+
+
+	OnInit() {
 		this.read();
-
-		if(this.locationsSubject.value.length > 0) {
-			this.full = true;
-		}
-
+		this.add(this.loc);
 	}
 
 	replace(index: number, location: Location) {
 		this.locationsSubject[index].value = location;
+		this.save();
 	}
 
 	read() {
@@ -50,75 +57,21 @@ export class LocationsService {
 
 	clear() {
 		localStorage.setItem("locations", null);
-		console.log(this.locationsSubject.value);
 
 		this.read();
-	}
-
-	addCityId(cityId: string) : void {
-
-		let location: Location = {
-
-			type: "city_id",
-			cityId: cityId
-
-		}
-	
-		this.locationsSubject.value.push(location);
-		this.locationsSubject.next(this.locationsSubject.value);
-		this.save();
-
-	}
-
-	addCoordinates(lat: string, lng: string) : void {
-
-		let location: Location = {
-
-			type: "coordinates",
-			lat: lat,
-			lng: lng
-		}
-
-		this.locationsSubject.value.push(location);
-		this.locationsSubject.next(this.locationsSubject.value);
-		this.save();
-
-	}
-
-	addZipCode(zipCode: string, countryCode: string) : void {
-
-		let location: Location  = {
-
-			type: "zipcode",
-			zipCode: zipCode,
-			countryCode: countryCode
-		}
-
-		this.locationsSubject.value.push(location);
-		this.locationsSubject.next(this.locationsSubject.value);
-		this.save();
-
 	}
 
 	add(location: Location) : void {
 
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
-		this.save();
 
-		if(this.locationsSubject.value.length > 0) {
-			this.full = true;
-		} else {
-			this.full = false;
-		}
+		this.save();
 		
 	}
 
 	save() {
-
 		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
-		this.read();
-
 	}
 
 	observe() {
@@ -128,18 +81,8 @@ export class LocationsService {
 	}
 
 	delete(index) {
-
 		this.locationsSubject.value.splice(index, 1);
-		console.log(this.locationsSubject.value);
 		this.save();
-
-		if(this.locationsSubject.value.length > 0) {
-			this.full = true;
-		} else {
-			this.full = false;
-		}
-
-
 	}
 }
 
