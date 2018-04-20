@@ -66,9 +66,6 @@ export class WeatherService {
 		params = params.append('appid', settings.apiKey);
 		params = params.append('units', settings.unitType);
 
-
-
-
 		// adding more params to the api request based on the location type to get spesific location based on three values
 		if (location.type == 'coordinates') {
 			params = params.append('lat', location.lat);
@@ -81,6 +78,8 @@ export class WeatherService {
 			params = params.append('id', location.cityId);
 			// adding params based on city_id
 		}
+
+		
 
 		let url = `${WeatherService.BASE_URL}forecast`;
 		

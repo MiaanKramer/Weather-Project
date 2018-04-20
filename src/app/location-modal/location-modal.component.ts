@@ -23,9 +23,7 @@ export class LocationModalComponent {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() { }
 
 
   

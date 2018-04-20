@@ -16,10 +16,6 @@ export interface Location {
 
 }
 
-
-
-
-
 @Injectable()
 export class LocationsService {
 
@@ -27,19 +23,13 @@ export class LocationsService {
 
 	constructor() { }
 
-	loc: Location = {
-		type: 'zipcode',
-		zipCode: '7646'
-	}
-
-
 	OnInit() {
 		this.read();
-		this.add(this.loc);
 	}
 
 	replace(index: number, location: Location) {
 		this.locationsSubject[index].value = location;
+		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
 	}
 
@@ -65,6 +55,7 @@ export class LocationsService {
 
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
+		
 
 		this.save();
 		

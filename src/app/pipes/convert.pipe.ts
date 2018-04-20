@@ -23,9 +23,9 @@ export class windPipe implements PipeTransform {
 
     transform(value: number) {
         if (this.settings.get().unitType == "metric") {
-            return (value + "kmph")
+            return (value + "mps");
         } else if (this.settings.get().unitType == "imperial") {
-            return (value + "mph")
+            return (value + "fps");
         }
 
         return value;

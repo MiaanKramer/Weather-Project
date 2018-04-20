@@ -11,26 +11,26 @@
         <div *ngIf="data.type == 'coordinates'">
                 <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
             <br>
-                <input placeholder="Lat" matInput required [(ngModel)]="data.lat">
+                <input placeholder="Lat" matInput required [(ngModel)]="data.lat" cdkFocusInitial>
             <br>
                 <input placeholder="Lng" matInput required [(ngModel)]="data.lng">
             <br>
         </div>
         <div *ngIf="data.type == 'zipcode'">
             <br>
-                <input matInput required placeholder="Zip Code" [(ngModel)]="data.zipcode">
+                <input matInput required placeholder="Zip Code" [(ngModel)]="data.zipcode" cdkFocusInitial>
             <br>
                 <input matInput required placeholder="Country Code" [(ngModel)]="data.Country">
             <br>
         </div>
         <div *ngIf="data.type == 'city_id'">
             <br>
-                <input matInput required placeholder="City ID" [(ngModel)]="data.city">
+                <input matInput required placeholder="City ID" [(ngModel)]="data.city" cdkFocusInitial>
             <br>
         </div>
             <mat-dialog-actions>
                 <button mat-button color="primary" [mat-dialog-close]= "data">ADD</button>
-                <button mat-button color="primary" (click)="onNoClick()" cdkFocusInitial>CANCEL</button>
+                <button mat-button color="primary" (click)="onNoClick()">CANCEL</button>
             </mat-dialog-actions>
     </mat-dialog-content>
 </div>

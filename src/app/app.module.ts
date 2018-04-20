@@ -66,8 +66,10 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
     SettingsService,
     WeatherService,
     LocationsService,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LocationModalComponent]
+  entryComponents: [LocationModalComponent, LocationsModalEditComponent]
 })
 export class AppModule { }

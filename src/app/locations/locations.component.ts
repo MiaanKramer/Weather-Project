@@ -18,9 +18,15 @@ export class LocationsComponent implements OnInit {
 
 	locationsSubject: Observable<Location[]>;
 
-	
-
-	selectedLocation: Location;
+	selectedLocation: Location = {
+		type: "coordinates",
+		cityName: "Generic",
+		cityId: "ZA27",
+		lat: "-32",
+		lng: "18",
+		zipCode: "7646",
+		countryCode: "RSA" 	
+		};
 
 	constructor(private locations: LocationsService, public dialog: MatDialog) {}
 
@@ -41,27 +47,26 @@ export class LocationsComponent implements OnInit {
 	}   
 
     openEdit(index): void {
-
-			this.selectedLocation = this.locationsSubject[index];
 				
         let dialogRef = this.dialog.open(LocationsModalEditComponent, {
           width: '325px',
           height: '500px',
-          data: this.selectedLocation
+          data: this.locationsSubject[index].value
         });
     
-        dialogRef.afterClosed().subscribe(result => {
-				this.locations.replace(index, this.selectedLocation);
-			        
-        });
+        dialogRef.afterClosed().subscribe((result: Location) => {
+			this.locations.replace(index, result);
+			
+						        
+		});
+		
+		this.read();
 			}
 			
 	openAdd(): void {
 
 		let empty: Location = {
-			type: 'coordinates',
-			lat: null,
-			lng: null
+			type: 'coordinates'
 		}
 
 		let dialogRef = this.dialog.open(LocationModalComponent, {
@@ -70,9 +75,10 @@ export class LocationsComponent implements OnInit {
 			data: empty
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
-			
+		dialogRef.afterClosed().subscribe((result: Location) => {
 				this.locations.add(result);
 		});
+
+		this.read();
 	}
 }
