@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { SettingsService, Settings } from '../settings.service';
 
 @Component({
@@ -8,43 +11,53 @@ import { SettingsService, Settings } from '../settings.service';
 })
 export class SettingsComponent implements OnInit {
 
-	
+    formGroup = new FormGroup({
+        apiKey: new FormControl('', [Validators.required, Validators.min(10)], [this.validateApiKey.bind(this)]),
+        unitType: new FormControl('metric', [Validators.required])
+    });
 
-  constructor(public settingsService: SettingsService) {
-  }
+    constructor(
+        public settingsService: SettingsService,
+        private _router: Router,
+        private _snackbar: MatSnackBar
+    ) {}
 
-  settings: Settings = null;
+    ngOnInit() {
+        this.formGroup.reset(this.settingsService.get());
+    }
 
-  ngOnInit() {
-  
-    this.settings = this.settingsService.get();
+    answer: string = '';
+    answerDisplay: string = '';
+    showSpinner: boolean = false;
 
-  }
+    reset() {
+        this.settingsService.reset();
+        this.formGroup.reset(this.settingsService.get());
+    }
 
-  answer: string = '';
-  answerDisplay: string = '';
-  showSpinner: boolean = false;
+    save() {
 
+        if(this.formGroup.valid){
 
-  // basic spinner to simulate loading but no loading 
-  // will be present since im working with local storage
-showAnswer() {
-    this.showSpinner = true;
+            let settings = this.formGroup.value;
+            this.settingsService.set(settings);
+            this._snackbar.open("Settings saved!", null, {duration: 4000});
+            this._router.navigate(['/home']);
+        }else{
+            this._snackbar.open("Settings invalid", null, { duration: 4000 });
+        }
 
-	setTimeout(() => {
-		this.answerDisplay = this.answer;
-		this.showSpinner = false;
-	}, 2000);
-}
+    }
 
-	reset() {
-		this.settingsService.reset();
-		this.settings = this.settingsService.get();
-	}
+    validateApiKey(control: AbstractControl){
+        return this.settingsService
+                    .validateApiKey(control.value)
+                    .map(result => {
+                        console.log('validation ', result);
+                        if(result) return null;
+                        else return { invalidApiKey: true };
+                    });
+    }
 
-	save() {
-		this.settingsService.set(this.settings);
-		this.showAnswer();
-	}
 
 }

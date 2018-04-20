@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { all } from 'q';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class SettingsService {
 
 	private current: Settings;
 
-  	constructor() {
-		this.current = this.read();
+  	constructor(private _http: HttpClient) {
+		this.read();
 	}
 
 	set(settings: Settings)	{
@@ -19,24 +22,47 @@ export class SettingsService {
 		return Object.assign({}, this.current);
 	}
 
+	reset(): void {
+		this.set({
+			apiKey: null,
+			unitType: 'metric'
+		});
+	}
+
+	validateApiKey(apiKey: string){
+		return this._http.get(`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${apiKey}`, {observe: 'response'})
+						.catch(err => {
+							return Observable.of(err);
+						})
+						.map(response => {
+							if(response.status === 200){
+								return true;
+							}
+							return false;
+						});
+	}
+
 	private read(){
-		return JSON.parse(localStorage.getItem("settings"));
+
+		let stored = localStorage.getItem("settings");
+
+		if(!stored){
+			this.reset();
+			return;
+		}
+
+		try {
+			this.current = JSON.parse(stored);
+		}catch(e){
+			console.warn('SettingsService: Settings invalid, resetting...')
+			this.reset();
+		}
+
 	}
 
 	private save(settings: Settings){
-		this.current = settings;
 		localStorage.setItem("settings", JSON.stringify(settings));
 	}
-
-	reset(): void {
-		// reset settings to defaults
-		localStorage.setItem("settings", JSON.stringify({
-			apiKey: '24d09d88dd8b97951eeb4f7f56da91c5',
-			unitType: 'metric'
-		}));
-		this.current = this.read();
-	}
-
 }
 
 export interface Settings {

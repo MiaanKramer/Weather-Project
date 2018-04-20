@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <!-- removed sidenav and combined with toolbar since toolbar wasnt in
+             use and was having trouble with sidenav not displaying correctly -->
+        <h1>{{ toolbarTitle }}</h1>
+        <span class="spacer"></span>
+        <a mat-raised-button color="primary" routerLink="/home" routerLinkActive="active">HOME</a>
+        <a mat-raised-button color="primary" routerLink="/locations" routerLinkActive="active">LOCATIONS</a>
+        <a mat-raised-button color="primary" routerLink="/settings" routerLinkActive="active">SETTINGS</a>
+        <!-- toolbar layout with link buttons to go between pages -->
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="view-body" [ngClass]="'layout-' + layout">
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,22 @@
+
+:host {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+
+.view-body {
+    flex: 1 1 auto;
+    display: flex;
+
+    &.layout-center-center {
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

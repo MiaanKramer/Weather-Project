@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule, MatButtonModule, MatToolbarModule,
          MatGridListModule, MatDividerModule, MatFormFieldModule,
          MatInputModule, MatCardModule, MatMenuModule, MatIconModule,
-         MatProgressSpinnerModule, MatSelectModule, MatCheckboxModule, MatDialogModule, matDialogAnimations} from '@angular/material';
+         MatProgressSpinnerModule, MatSelectModule, MatCheckboxModule,
+          MatDialogModule, matDialogAnimations, MatSnackBarModule
+        
+  } from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { APP_ROUTES } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { AppViewComponent } from './layout/app-view.component';
 
 import { WeatherService } from './weather.service';
 import { SettingsService } from './settings.service';
@@ -31,6 +35,7 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
 @NgModule({
   declarations: [
     AppComponent,
+    AppViewComponent,
     SettingsComponent,
     LocationsComponent,
     HomeComponent,
@@ -38,8 +43,7 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
     convertPipe,
     windPipe,
     directionPipe,
-    LocationsModalEditComponent
-
+    LocationsModalEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
     FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -60,7 +65,8 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     SettingsService,

@@ -1,32 +1,43 @@
-<h1 class="display-1" style="text-align: left; color: #673ab7">Settings</h1>
-<div layout="row" layout-align="center start">
+<app-view toolbarTitle="Settings" layout="center-center">
     <mat-card>
-        <!-- Settings of application displayed and edited here -->
-            <mat-divider></mat-divider>
-            <br>
+        <mat-card-header>
+            <mat-icon mat-card-avatar>settings</mat-icon>
+            <mat-card-title>Settings</mat-card-title>
+            <mat-card-subtitle>Set your api key and unit</mat-card-subtitle>
+        </mat-card-header>
         <mat-card-content>
-            <mat-form-field>
-                <!-- Displays current api key used to comune with the open weather map api -->
-                <input placeholder="API-Key" matInput [(ngModel)] = "settings.apiKey">
-                <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-select placeholder="UnitType" [(ngModel)] = "settings.unitType">
-                    <!-- Takes in preferred units of measurement -->
-                    <mat-option required value="imperial">Imperial</mat-option>
-                    <mat-option value="metric">Metric</mat-option>
-                    <!-- Note: find way to display selected current settings -->
-                </mat-select>
-            </mat-form-field>
+
+            <form [formGroup]="formGroup" id="settings_form" (ngSubmit)="save()" novalidate>
+                <mat-form-field>
+                    <!-- Displays current api key used to comune with the open weather map api -->
+                    <input placeholder="API Key" matInput formControlName="apiKey" required>
+                    <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
+                    <mat-hint *ngIf="formGroup.get('apiKey').status === 'PENDING'">
+                        Checking api key..
+                    </mat-hint>
+                    <mat-error *ngIf="formGroup.get('apiKey').errors && formGroup.get('apiKey').errors.invalidApiKey">
+                        Invalid Api Key
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.get('apiKey').errors && formGroup.get('apiKey').errors.required">
+                       Please enter api key
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Unit Type" formControlName="unitType" required>
+                        <!-- Takes in preferred units of measurement -->
+                        <mat-option value="imperial">Imperial</mat-option>
+                        <mat-option value="metric">Metric</mat-option>
+                        <!-- Note: find way to display selected current settings -->
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
         </mat-card-content>
-        <mat-divider></mat-divider>
-        <br>
-        <mat-card-actions>
-            <!-- Save button - Sends entered values to settings service to be saved to local storage -->
-            <button color="primary" mat-raised-button (click)="save()">SAVE</button>
+        <mat-card-actions class="text-right">
             <!-- Reset button restores default settings incase errors were made -->
-            <button color="primary" mat-raised-button (click)="reset()">RESET</button>
+            <button mat-button (click)="reset()">RESET</button>
+            <!-- Save button - Sends entered values to settings service to be saved to local storage -->
+            <button color="primary" mat-raised-button type="submit" form="settings_form" [disabled]="formGroup.status === 'PENDING'">SAVE</button>
         </mat-card-actions>
     </mat-card>
-</div>
+</app-view>
