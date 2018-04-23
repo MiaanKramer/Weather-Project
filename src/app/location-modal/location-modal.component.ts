@@ -37,11 +37,12 @@ export class LocationModalComponent {
 
     selectedType = 'coordinates';
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onNoClick() {
+	this.dialogRef.close();
+	
   }
 
-  validateLatLng(lat: number, lng: number) {
+  validateLatLng() {
 	  let temp = 0;
 	let latLng = {
 		lat: false,
@@ -51,21 +52,21 @@ export class LocationModalComponent {
 	};
 
 	try {
-		temp = temp + lat;
+		temp = temp + this.addLocation.value.lat;
 	} catch {
 		latLng.latNaN = true;
 	}
 	try {
-		temp = temp + lng;
+		temp = temp + this.addLocation.value.lng;
 	} catch {
 		latLng.lngNaN = true;
 	}
 
-	if(lat < 90 && lat > -90) {
+	if(this.addLocation.value.lat < 90 && this.addLocation.value.lat > -90) {
 		latLng.lat = true;
 	}
 
-	if(lng < 180 && lng > -180) {
+	if(this.addLocation.value.lng < 180 && this.addLocation.value.lng > -180) {
 		latLng.lng = true;
 	}
 
@@ -77,6 +78,7 @@ export class LocationModalComponent {
   addlocation() {
 	if(this.addLocation.valid) {
 		this.locationService.add(this.addLocation.value);
+		console.log(this.addLocation.value);
 	} else {
 		this._snackbar.open("Location Invalid", null, { duration: 3000});
 	}

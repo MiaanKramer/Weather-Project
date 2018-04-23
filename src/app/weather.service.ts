@@ -68,8 +68,7 @@ export class WeatherService {
 
 		// setting the settings of the api request according to the save settings in the settings component
 
-		params = params.append('appid', settings.apiKey);
-		params = params.append('units', settings.unitType);
+		
 
 		// adding more params to the api request based on the location type to get spesific location based on three values
 		if (location.type == 'coordinates') {
@@ -80,10 +79,14 @@ export class WeatherService {
 			params = params.append('zip', location.zipCode + ',' + location.countryCode)
 			// adding params based on zipcode
 		} else if(location.type == 'cityName') {
-			params = params.append('city name', location.cityName + ',' + location.countryCode);
+			let query = location.cityName + ',' + location.countryCode;
+			console.log(query);
+			params = params.append('q', query);
 			// adding params based on city_id
 		}
 
+		params = params.append('appid', settings.apiKey);
+		params = params.append('units', settings.unitType);
 		
 
 		let url = `${WeatherService.BASE_URL}forecast`;

@@ -37,7 +37,7 @@ export class LocationsService {
 		let storage = JSON.parse(localStorage.getItem("locations"));
 
 		if(storage) {
-			this.locationsSubject.value.push(storage);
+			this.locationsSubject.value;
 			this.locationsSubject.next(this.locationsSubject.value);
 		} else {
 			this.locationsSubject.next([]);
@@ -62,7 +62,6 @@ export class LocationsService {
 
 	save() {
 		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
-		this.read();
 	}
 
 	observe() {

@@ -1,32 +1,30 @@
-<h1 class="display-1" style="text-align: left; color: #673ab7">Forecasts</h1>
-<!-- divs formed by other child divs containing the forecasts for one spesific location -->
+<app-view toolbarTitle="Forecasts">
     <div *ngIf="weathersSubject | async as localWeathers">
         <div *ngFor="let loc of localWeathers">
-            {{loc.type}}
-            <div *ngFor="let cast of loc.forecasts">
-                        <mat-card style="text-align: center">
-                            {{cast.dateTime}}
-                            <br>
-                            <!-- Gathering each image based on their condition Icon -->
-                            <img style="width: 100px" mat-card-image src="http://openweathermap.org/img/w/{{cast.conditionIcon}}.png" alt="{{cast.condition}}">
-                            <mat-card-actions>
-                                <span>
-                                    <p>Avg: {{cast.tempAvg | convertTemp}}</p>
-                                    <p>Condition: {{cast.conditions}}</p>
-                                </span>
-                            </mat-card-actions>
-                            <mat-card-footer>
-                                <p>
-                                    <span>Min: {{cast.tempMin | convertTemp}}</span>
-                                    <span>Max: {{cast.tempMax | convertTemp}}</span>
-                                </p>
-                                <p>
-                                    <span>Wind Speed: {{cast.windSpeed | convertWind}}</span>
-                                    <span>Wind Direction: {{cast.windDirection | convertDirection}}</span>
-                                    <span>{{cast.windDirection}}°</span>
-                                </p>
-                            </mat-card-footer>
+            <mat-card>
+                <mat-card-subtitle>
+                    {{loc.type | uppercase}}
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <div *ngFor="let cast of loc.forecasts">
+                        <mat-card>
+                            <mat-card-title>{{cast.dateTime}}</mat-card-title>
+                            <mat-card-content>
+                                <img mat-card-sm-image src="http://openweathermap.org/img/w/{{cast.conditionIcon}}.png" alt="{{cast.condition}}">
+                                <mat-card>
+                                    <mat-card-title>{{cast.tempAvg | convertTemp}}</mat-card-title>
+                                    <mat-card-subtitle>{{cast.condition}}</mat-card-subtitle>
+                                    <mat-card-content>
+                                        {{cast.tempMin | convertTemp}} {{cast.tempMax | convertTemp}}
+                                    </mat-card-content>
+                                </mat-card>
+                            </mat-card-content>
                         </mat-card>
-            </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            {{loc.type}}
+            
         </div>
     </div>
+</app-view>
