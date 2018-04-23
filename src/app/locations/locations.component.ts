@@ -20,12 +20,11 @@ export class LocationsComponent implements OnInit {
 
 	selectedLocation: Location = {
 		type: "coordinates",
-		cityName: "Generic",
-		cityId: "ZA27",
+		cityName: "Paarl",
 		lat: "-32",
 		lng: "18",
 		zipCode: "7646",
-		countryCode: "RSA" 	
+		countryCode: "ZA" 	
 		};
 
 	constructor(private locations: LocationsService, public dialog: MatDialog) {}
@@ -50,13 +49,12 @@ export class LocationsComponent implements OnInit {
 				
         let dialogRef = this.dialog.open(LocationsModalEditComponent, {
           width: '325px',
-          height: '500px',
+          height: '350px',
           data: this.locationsSubject[index].value
         });
     
         dialogRef.afterClosed().subscribe((result: Location) => {
 			this.locations.replace(index, result);
-			
 						        
 		});
 		
@@ -70,9 +68,8 @@ export class LocationsComponent implements OnInit {
 		}
 
 		let dialogRef = this.dialog.open(LocationModalComponent, {
-			width: '325px',
-			height: '500px',
-			data: empty
+			width: '350px',
+			height: '330px'
 		});
 
 		dialogRef.afterClosed().subscribe((result: Location) => {

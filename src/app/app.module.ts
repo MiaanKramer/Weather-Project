@@ -8,7 +8,7 @@ import { MatSidenavModule, MatButtonModule, MatToolbarModule,
          MatGridListModule, MatDividerModule, MatFormFieldModule,
          MatInputModule, MatCardModule, MatMenuModule, MatIconModule,
          MatProgressSpinnerModule, MatSelectModule, MatCheckboxModule,
-          MatDialogModule, matDialogAnimations, MatSnackBarModule
+          MatDialogModule, matDialogAnimations, MatSnackBarModule, MatRadioModule
         
   } from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -66,7 +66,8 @@ import { LocationsModalEditComponent } from './locations-modal-edit/locations-mo
     MatSelectModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule
   ],
   providers: [
     SettingsService,

@@ -6,9 +6,8 @@ import { LocationsComponent } from './locations/locations.component';
 
 export interface Location {
 
-	type: 'coordinates' | 'zipcode' | 'city_id';
+	type: 'coordinates' | 'zipcode' | 'cityName';
 	cityName?: string;
-	cityId?: string;
 	lat?: string;
 	lng?: string;
 	zipCode?: string;
@@ -63,6 +62,7 @@ export class LocationsService {
 
 	save() {
 		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
+		this.read();
 	}
 
 	observe() {
@@ -76,5 +76,3 @@ export class LocationsService {
 		this.save();
 	}
 }
-
-

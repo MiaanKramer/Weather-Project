@@ -6,37 +6,29 @@
             <mat-card-subtitle>Set your api key and unit</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-
             <form [formGroup]="formGroup" id="settings_form" (ngSubmit)="save()" novalidate>
                 <mat-form-field>
-                    <!-- Displays current api key used to comune with the open weather map api -->
                     <input placeholder="API Key" matInput formControlName="apiKey" required>
-                    <!-- Note: Link api key of settings to display here in real time (two way data binding) -->
                     <mat-hint *ngIf="formGroup.get('apiKey').status === 'PENDING'">
-                        Checking api key..
+                        Checking Api Key...
                     </mat-hint>
                     <mat-error *ngIf="formGroup.get('apiKey').errors && formGroup.get('apiKey').errors.invalidApiKey">
                         Invalid Api Key
                     </mat-error>
                     <mat-error *ngIf="formGroup.get('apiKey').errors && formGroup.get('apiKey').errors.required">
-                       Please enter api key
+                       Please Enter Api Key
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select placeholder="Unit Type" formControlName="unitType" required>
-                        <!-- Takes in preferred units of measurement -->
                         <mat-option value="imperial">Imperial</mat-option>
                         <mat-option value="metric">Metric</mat-option>
-                        <!-- Note: find way to display selected current settings -->
                     </mat-select>
                 </mat-form-field>
             </form>
-
         </mat-card-content>
         <mat-card-actions class="text-right">
-            <!-- Reset button restores default settings incase errors were made -->
             <button mat-button (click)="reset()">RESET</button>
-            <!-- Save button - Sends entered values to settings service to be saved to local storage -->
             <button color="primary" mat-raised-button type="submit" form="settings_form" [disabled]="formGroup.status === 'PENDING'">SAVE</button>
         </mat-card-actions>
     </mat-card>

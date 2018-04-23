@@ -1,36 +1,49 @@
-<div>
-  <h3 mat-dialog-title>Add Location</h3>
-  <mat-dialog-content>
-      <select matInput [(ngModel)] = "data.type">
-          <option value="coordinates">Coordinates</option>
-          <option value="zipcode">Zip Code</option>
-          <option value="city_id">City ID</option>
-      </select>
-      <br>
-      <!-- Every location has a type but not every location is given coordinates of cityId and so on -->
-      <div *ngIf="data.type == 'coordinates'">
-              <!-- so based off of it being either a coordinate, cityId or zipcode its given diffrent results using ngIf -->
-          <br>
-              <input placeholder="Lat" matInput required [(ngModel)]="data.lat">
-          <br>
-              <input placeholder="Lng" matInput required [(ngModel)]="data.lng">
-          <br>
-      </div>
-      <div *ngIf="data.type == 'zipcode'">
-          <br>
-              <input matInput required placeholder="Zip Code" [(ngModel)]="data.zipcode">
-          <br>
-              <input matInput required placeholder="Country Code" [(ngModel)]="data.Country">
-          <br>
-      </div>
-      <div *ngIf="data.type == 'city_id'">
-          <br>
-              <input matInput required placeholder="City ID" [(ngModel)]="data.city">
-          <br>
-      </div>
-          <mat-dialog-actions>
-              <button mat-button color="primary" [mat-dialog-close]= "data">UPDATE</button>
-              <button mat-button color="primary" (click)="onNoCLick()" cdkFocusInitial>CANCEL</button>
-          </mat-dialog-actions>
-  </mat-dialog-content>
-</div>
+<mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar>plus</mat-icon>
+            <mat-card-title>Add Location</mat-card-title>
+            <mat-card-subtitle>Please Edit Location Information</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="addLocation" id="add_location_form" (ngSumbit)="onSubmit(add_location_form)" novalidate>
+                    <mat-select placeholder="Location type" formControlName="type" [(ngModel)]="data.type" required>
+                        <mat-option value="coordinates">Coordinates</mat-option>
+                        <mat-option value="zipCode">Zip Code</mat-option>
+                        <mat-option value="city_id">City ID</mat-option>
+                    </mat-select>
+                    <div *ngIf="type == 'coordinates'">
+                            <mat-form-field ngRequired="type == 'coordinates'">
+                                <input placeholder="Latitude" matInput formControlName="lat" [(ngModel)]="data.lat">
+                                <mat-hint>Value Between -90 And 90</mat-hint>
+                            </mat-form-field>
+                            <mat-form-field ngRequired="type == 'coordinates'">
+                                <input placeholder="Longitude" matInput formControlName="lng" [(ngModel)]="data.lng">
+                                <mat-hint>Value Between -180 And 180</mat-hint>
+                            </mat-form-field>                        
+                    </div>
+                    <div *ngIf="type == 'zipCode'">
+                            <mat-form-field ngRequired="type == 'zipCode'">
+                                <input placeholder="Zip Code" matInput formControlName="zipCode" [(ngModel)]="data.lat">
+                                <mat-hint>Example: Central Paarl's Zip Code Is 7646</mat-hint>
+                            </mat-form-field>
+                            <mat-form-field ngRequired="type == 'zipCode'">
+                                <input placeholder="Country Code" matInput formControlName="countryCode" [(ngModel)]="data.lat">
+                                <mat-hint>Example: South Africa's Country Code Is 'ZA'</mat-hint>
+                            </mat-form-field>
+                    </div>
+                    <div *ngIf="type == 'cityName'">
+                        <mat-form-field ngRequired="type == 'cityName'">
+                                <input placeholder="City Name" matInput formControlName="cityName" [(ngModel)]="data.cityName">
+                        </mat-form-field>
+                        <mat-form-field ngRequired="type == 'cityName'">
+                                <input placeholder="Country Code" matInput formControlName="cityId" [(ngModel)]="data.countryCode">
+                                <mat-hint>Example: South Africa's Country Code Is 'ZA'</mat-hint>
+                        </mat-form-field>
+                    </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="OnNoClick()">CANCEL</button>
+            <button mat-raised-button color="primary" type="submit" form="add_location_form" >ADD</button>
+        </mat-card-actions>
+    </mat-card>

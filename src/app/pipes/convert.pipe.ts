@@ -39,17 +39,11 @@ export class directionPipe implements PipeTransform {
     transform(value: number) {
         if(value > 0 && value < 90) {
             return "NE";
-        }
-
-        if(value > 90 && value < 180) {
+        }else if(value > 90 && value < 180) {
             return "SE";
-        }
-        
-        if(value > 180 && value < 270) {
+        }else if(value > 180 && value < 270) {
             return "SW";
-        }
-
-        if(value > 270 && value < 360) {
+        } else if(value > 270 && value < 360) {
             return "NW";
         }
             

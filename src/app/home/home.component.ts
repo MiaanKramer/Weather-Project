@@ -15,7 +15,7 @@ import { mapTo } from 'rxjs/operator/mapTo';
 export class HomeComponent implements OnInit {
 
 
-    constructor(private weather: WeatherService, private location: LocationsService) {
+    constructor(private weatherService: WeatherService, private locationService: LocationsService) {
 		
     }
 
@@ -26,11 +26,16 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
-		this.locations = this.location.observe();
 
+		this.locations = this.locationService.observe();
+		// Sets this.locations equal to the observable locations array contained in the location service
+		// the observe function of locationService reterns the locationsSubject as an observable so that
+		//  locations can become subscribed to it if any changes occur
 		this.weathersSubject = this.locations.switchMap(locations => {
-			let obs = locations.map(loc => this.weather.getForecastByLocation(loc));
-
+			let obs = locations.map(loc => this.weatherService.getForecastByLocation(loc));
+			// Maps through the locations Observable array and passed each object to the getForecastByLocation
+			// function on the weather service which inturn returns an object of objects to populate the weatherSubject
+			// and display the retrieved Api requests as DOM elements
 			return Observable.combineLatest(obs);
 		});
       

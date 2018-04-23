@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { Pipe } from '@angular/core';
+import { count } from 'rxjs/operator/count';
 
 
 @Injectable()
@@ -35,15 +36,19 @@ export class WeatherService {
 
 		let location: Location = {
 			type: 'zipcode',
+			zipCode: zipCode,
+			countryCode: countryCode
 		};
 
 		return this.requestForecast(location);
 	}
 
-	getForecastByCityId(cityId: string): Observable<LocalWeather> {
+	getForecastByCityId(cityName: string, countryCode: string): Observable<LocalWeather> {
 
 		let location: Location = {
-			type: 'city_id'
+			type: 'cityName',
+			cityName: cityName,
+			countryCode: countryCode
 		};
 
 		return this.requestForecast(location);
@@ -72,10 +77,10 @@ export class WeatherService {
 			params = params.append('lon', location.lng);
 			// adding params based on coordinates
 		} else if (location.type == 'zipcode') {
-			params = params.append('zip', location.zipCode)
+			params = params.append('zip', location.zipCode + ',' + location.countryCode)
 			// adding params based on zipcode
-		} else if(location.type == 'city_id') {
-			params = params.append('id', location.cityId);
+		} else if(location.type == 'cityName') {
+			params = params.append('city name', location.cityName + ',' + location.countryCode);
 			// adding params based on city_id
 		}
 
