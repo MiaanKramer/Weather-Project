@@ -1,7 +1,7 @@
 <app-view toolbarTitle="Home">
     <div *ngIf="weathersSubject | async as localWeathers">
         <div *ngFor="let loc of localWeathers">
-            <mat-grid-list cols="4" gutterSize="15px">
+            <mat-grid-list cols="4" gutterSize="15px" rowHeight="2:1">
                 <h3>{{loc.type | uppercase}}</h3>
                 <mat-grid-tile *ngFor="let cast of loc.forecasts">
                     <mat-card>

@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
 
 
+
 		this.locations = this.locationService.observe();
 		// Sets this.locations equal to the observable locations array contained in the location service
 		// the observe function of locationService reterns the locationsSubject as an observable so that
