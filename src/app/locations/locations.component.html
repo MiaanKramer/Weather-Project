@@ -1,37 +1,39 @@
 <app-view toolbarTitle="Locations">
-    <mat-card>
-        <h1 class="display-1" style="text-align: left; color: #673ab7">Locations</h1>
-            <mat-card *ngFor="let loc of (locationsSubject | async); index as i">
-                <mat-card-title *ngIf="loc.type == 'cityName'">
-                    <p>{{loc.cityName || toUppercase}}</p>
-                </mat-card-title>
-                <mat-card-title *ngIf="loc.type == 'zipCode'">
-                    <p>Zip Code</p>
-                </mat-card-title>
-                <mat-card-title *ngIf="loc.type == 'coordinates'">
-                    <p>Coordinates</p>
-                </mat-card-title>
-                <mat-card-subtitle *ngIf="loc.type == 'coordinates'">
-                    <p>Lat: {{loc.lat}}</p>
-                    <p>Lng: {{loc.lng}}</p>
-                </mat-card-subtitle>
-                <mat-card-subtitle *ngIf="loc.type == 'zipCode'">
-                    <p>ZipCode: {{loc.zipCode}}</p>
-                    <p>Country Code: {{loc.countryCode}}</p>
-                </mat-card-subtitle>
-                <mat-card-subtitle *ngIf="loc.type == 'cityName'">
-                    <p>City Name: {{loc.cityName}}</p>
-                    <p>Country Code: {{loc.countryCode}}</p>
-                </mat-card-subtitle>
-                <mat-card-actions>
-                    <button mat-raised-button color="primary" class="material-icons" (click)="openEdit(i)">Edit</button>
-                    <button mat-raised-button color="primary" class="material-icons" (click)="delete(i)" >Delete</button>
-                </mat-card-actions>
-            </mat-card>
-        <mat-card-actions>
-            <button mat-raised-button (click)="openAdd()" color="primary">Add Location</button>
-            <button mat-button (click)="clear()" color="primary">Clear Locations</button>
-        </mat-card-actions>
-    </mat-card>
+    <div>
+        <mat-card *ngFor="let loc of (locationsSubject | async); index as i">
+            <mat-card-title *ngIf="loc.type == 'cityName'">
+                {{loc.cityName | titlecase}}
+            </mat-card-title>
+            <mat-card-title *ngIf="loc.type == 'zipCode'">
+                Zip Code
+            </mat-card-title>
+            <mat-card-title *ngIf="loc.type == 'coordinates'">
+                Coordinates
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="loc.type == 'coordinates'">
+                Lat: {{loc.lat}}
+                <br>
+                Lng: {{loc.lng}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="loc.type == 'zipCode'">
+                ZipCode: {{loc.zipCode}}
+                <br>
+                Country Code: {{loc.countryCode | uppercase}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="loc.type == 'cityName'">
+                City Name: {{loc.cityName | titlecase}}
+                <br>
+                Country Code: {{loc.countryCode | uppercase}}
+            </mat-card-subtitle>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" class="material-icons" (click)="openEdit(i)">Edit</button>
+                <button mat-raised-button color="primary" class="material-icons" (click)="delete(i)" >Delete</button>
+            </mat-card-actions>
+        </mat-card>
+            <mat-card-actions>
+                <button mat-raised-button (click)="openAdd()" color="primary">Add Location</button>
+                <button mat-button (click)="clear()" color="primary">Clear Locations</button>
+            </mat-card-actions>
+    </div>
 </app-view>
     

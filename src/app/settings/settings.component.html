@@ -28,8 +28,8 @@
             </form>
         </mat-card-content>
         <mat-card-actions class="text-right">
-            <button mat-button (click)="reset()">RESET</button>
-            <button color="primary" mat-raised-button type="submit" form="settings_form" [disabled]="formGroup.status === 'PENDING'">SAVE</button>
+            <button mat-button color="primary" (click)="reset()">RESET</button>
+            <button mat-raised-button color="primary" type="submit" form="settings_form" [disabled]="formGroup.status === 'PENDING'">SAVE</button>
         </mat-card-actions>
     </mat-card>
 </app-view>

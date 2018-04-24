@@ -42,39 +42,6 @@ export class LocationModalComponent {
 	
   }
 
-  validateLatLng() {
-	  let temp = 0;
-	let latLng = {
-		lat: false,
-		latNaN: false,
-		lng: false,
-		lngNaN: false
-	};
-
-	try {
-		temp = temp + this.addLocation.value.lat;
-	} catch {
-		latLng.latNaN = true;
-	}
-	try {
-		temp = temp + this.addLocation.value.lng;
-	} catch {
-		latLng.lngNaN = true;
-	}
-
-	if(this.addLocation.value.lat < 90 && this.addLocation.value.lat > -90) {
-		latLng.lat = true;
-	}
-
-	if(this.addLocation.value.lng < 180 && this.addLocation.value.lng > -180) {
-		latLng.lng = true;
-	}
-
-	return latLng;
-
-
-  }
-
   addlocation() {
 	if(this.addLocation.valid) {
 		this.locationService.add(this.addLocation.value);

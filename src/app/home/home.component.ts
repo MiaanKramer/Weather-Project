@@ -15,9 +15,7 @@ import { mapTo } from 'rxjs/operator/mapTo';
 export class HomeComponent implements OnInit {
 
 
-    constructor(private weatherService: WeatherService, private locationService: LocationsService) {
-		
-    }
+    constructor(private weatherService: WeatherService, private locationService: LocationsService) { }
 
 	locations: Observable<Location[]>;
 	
@@ -25,9 +23,6 @@ export class HomeComponent implements OnInit {
     
 
     ngOnInit() {
-
-
-
 		this.locations = this.locationService.observe();
 		// Sets this.locations equal to the observable locations array contained in the location service
 		// the observe function of locationService reterns the locationsSubject as an observable so that

@@ -41,11 +41,8 @@ export class LocationsService {
 				this.locationsSubject.value.push(location);
 			});
 			this.locationsSubject.next(this.locationsSubject.value);
-			console.log(this.locationsSubject.value);
-			console.log("Storage");
 		} else {
 			this.locationsSubject.next([]);
-			console.log("Null");
 		}
 	}
 
@@ -68,7 +65,6 @@ export class LocationsService {
 	observe() {
 
 		return this.locationsSubject.asObservable();
-
 	}
 
 	delete(index) {

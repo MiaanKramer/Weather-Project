@@ -6,9 +6,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { locateHostElement } from '@angular/core/src/render3/instructions';
 import { LocationsModalEditComponent } from '../locations-modal-edit/locations-modal-edit.component';
 
-
-
-
 @Component({
   selector: 'app-locations',
   templateUrl: './locations.component.html',
@@ -47,8 +44,7 @@ export class LocationsComponent implements OnInit {
 
     openEdit(index) {
 
-		this.selectedLocation = this.locationsSubject[index].value;
-
+		this.selectedLocation = this.locationsSubject[index];
 		
         let dialogRef = this.dialog.open(LocationsModalEditComponent, {
           width: '350px',
