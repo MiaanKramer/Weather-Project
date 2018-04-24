@@ -13,8 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class LocationsModalEditComponent {
-
-  editLocation: FormGroup;
   public location: Location;
   selectedType = 'coordinates';
   index = 0;
@@ -25,6 +23,14 @@ export class LocationsModalEditComponent {
     private fb: FormBuilder, private locationService: LocationsService, private _snackbar: MatSnackBar,) {}
 
 
+    editLocation: FormGroup = this.fb.group({
+      "type": [this.data.location.type, Validators.required],
+      "lat": [this.data.location.lat],
+      "lng": [this.data.location.lng],
+      "zipCode": [this.data.location.zipCode],
+      "countryCode": [this.data.location.countryCode, Validators.minLength(2)],
+      "cityName": [this.data.location.cityName]
+    });
 
     OnNoClick(): void {
     this.dialogRef.close();
@@ -45,14 +51,7 @@ ngOnInit() {
   this.location = this.data.location;
 
   
-  this.editLocation = this.fb.group({
-    "type": [this.data.location.type, Validators.required],
-    "lat": [this.data.location.lat],
-    "lng": [this.data.location.lng],
-    "zipCode": [this.data.location.zipCode],
-    "countryCode": [this.data.location.countryCode, Validators.minLength(2)],
-    "cityName": [this.data.location.cityName]
-  });
+  
   console.log(this.data.location);
 }
 }

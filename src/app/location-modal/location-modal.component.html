@@ -15,29 +15,47 @@
                         <mat-form-field ngRequired="type == 'coordinates'">
                             <input placeholder="Latitude" matInput formControlName="lat">
                             <mat-hint>Value Between -90 And 90</mat-hint>
+                            <mat-error *ngIf="addLocation.get('lat').errors && addLocation.get('lat').required">
+                                Invalid longitude value
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field ngRequired="type == 'coordinates'">
                             <input placeholder="Longitude" matInput formControlName="lng">
                             <mat-hint>Value Between -180 And 180</mat-hint>
+                            <mat-error *ngIf="addLocation.get('lng').errors && addLocation.get('lng').required">
+                                Invalid longitude value
+                            </mat-error>
                         </mat-form-field>                        
                 </div>
                 <div *ngIf="type == 'zipCode'">
                         <mat-form-field ngRequired="type == 'zipCode'">
                             <input placeholder="Zip Code" matInput formControlName="zipCode">
                             <mat-hint>Central Paarl's Is 7646</mat-hint>
+                            <mat-error *ngIf="addLocation.get('zipCode').errors && addLocation.get('zipCode').required">
+                                Invalid longitude value
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field ngRequired="type == 'zipCode'">
                             <input placeholder="Country Code" matInput formControlName="countryCode">
                             <mat-hint>South Africa's Code Is 'ZA'</mat-hint>
+                            <mat-error *ngIf="addLocation.get('countryCode').errors && addLocation.get('countryCode').required">
+                                Invalid longitude value
+                            </mat-error>
                         </mat-form-field>
                 </div>
                 <div *ngIf="type == 'cityName'">
                     <mat-form-field ngRequired="type == 'cityName'">
                             <input placeholder="City Name" matInput formControlName="cityName">
+                            <mat-error *ngIf="addLocation.get('cityName').errors && addLocation.get('cityName').required">
+                                Invalid longitude value
+                            </mat-error>
                     </mat-form-field>
                     <mat-form-field ngRequired="type == 'cityName'">
                             <input placeholder="Country Code" matInput formControlName="countryCode">
                             <mat-hint>South Africa's Code Is 'ZA'</mat-hint>
+                            <mat-error *ngIf="addLocation.get('countryCode').errors && addLocation.get('countryCode').required">
+                                Invalid longitude value
+                            </mat-error>
                     </mat-form-field>
                 </div>
         </form>

@@ -5,7 +5,7 @@
         <mat-card-subtitle>Please Fill Out Form Accordingly</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="editLocation" id="add_location_form" novalidate  (ngSubmit)="replace()">
+        <form [formGroup]="editLocation" id="add_location_form" novalidate  (ngSubmit)="updateLocation()">
                 <mat-select placeholder="Location type" formControlName="type" [(ngModel)]="selectedType" required>
                     <mat-option value="coordinates">Coordinates</mat-option>
                     <mat-option value="zipCode">Zip Code</mat-option>

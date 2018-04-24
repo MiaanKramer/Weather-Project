@@ -43,8 +43,6 @@ export class LocationsComponent implements OnInit {
 	}   
 
     openEdit(index) {
-
-		this.selectedLocation = this.locationsSubject[index];
 		
         let dialogRef = this.dialog.open(LocationsModalEditComponent, {
           width: '350px',
