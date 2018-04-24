@@ -45,37 +45,25 @@ export class LocationsComponent implements OnInit {
 		this.locations.delete(index);
 	}   
 
-    openEdit(index): void {
-				
-        let dialogRef = this.dialog.open(LocationsModalEditComponent, {
-          width: '325px',
-          height: '350px',
-          data: this.locationsSubject[index].value
-        });
-    
-        dialogRef.afterClosed().subscribe((result: Location) => {
-			this.locations.replace(index, result);
-						        
-		});
+    openEdit(index) {
+
+		this.selectedLocation = this.locationsSubject[index].value;
+
 		
-		this.read();
-			}
+        let dialogRef = this.dialog.open(LocationsModalEditComponent, {
+          width: '350px',
+          height: '330px',
+          data: {
+			  location: this.selectedLocation,
+			  index: index
+		  }
+        });
+	}
 			
-	openAdd(): void {
-
-		let empty: Location = {
-			type: 'coordinates'
-		}
-
+	openAdd() {
 		let dialogRef = this.dialog.open(LocationModalComponent, {
 			width: '350px',
 			height: '330px'
 		});
-
-		dialogRef.afterClosed().subscribe((result: Location) => {
-				this.locations.add(result);
-		});
-
-		this.read();
 	}
 }

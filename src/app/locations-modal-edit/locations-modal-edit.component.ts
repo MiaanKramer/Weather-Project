@@ -14,36 +14,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class LocationsModalEditComponent {
 
-  addLocation: FormGroup;
+  editLocation: FormGroup;
+  public location: Location;
+  selectedType = 'coordinates';
+  index = 0;
 
   constructor(
-    public dialogRef: MatDialogRef<LocationsModalEditComponent>, private fb: FormBuilder, private locationService: LocationsService, private _snackbar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-		this.addLocation = this.fb.group({
-			"type": ["", Validators.required],
-			"lat": ["", Validators.required],
-			"lng": ["", Validators.required],
-			"zipCode": ["", Validators.required],
-			"countryCode": ["", Validators.required],
-			"cityName": ["", Validators.required],
-			"cityId": ["", Validators.required]
-		});
-     }
+    @Inject(MAT_DIALOG_DATA) private data: {location: Location, index},
+    public dialogRef: MatDialogRef<LocationsModalEditComponent>,
+    private fb: FormBuilder, private locationService: LocationsService, private _snackbar: MatSnackBar,) {}
 
-    selectedType = 'coordinates';
+
 
     OnNoClick(): void {
     this.dialogRef.close();
   }
 
-  editLocation() {
-      if(this.addLocation.valid) {
+  updateLocation() {
+      if(this.editLocation.valid) {
+        this.locationService.replace(this.index, this.editLocation.value);
         this._snackbar.open("Location Updated", null, { duration: 3000 });
       } else {
         this._snackbar.open("Location Data Invalid", null, { duration: 3000});
       }
   }
 
-  ngOnInit() { }
+ngOnInit() {
+  this.selectedType = this.data.location.type;
+  this.index = this.data.index;
+  this.location = this.data.location;
+
+  
+  this.editLocation = this.fb.group({
+    "type": [this.data.location.type, Validators.required],
+    "lat": [this.data.location.lat],
+    "lng": [this.data.location.lng],
+    "zipCode": [this.data.location.zipCode],
+    "countryCode": [this.data.location.countryCode, Validators.minLength(2)],
+    "cityName": [this.data.location.cityName]
+  });
+  console.log(this.data.location);
+}
 }
 

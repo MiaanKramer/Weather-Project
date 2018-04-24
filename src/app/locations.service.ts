@@ -34,19 +34,23 @@ export class LocationsService {
 
 	read() {
 
-		let storage = JSON.parse(localStorage.getItem("locations"));
+		let storage: Location[] = JSON.parse(localStorage.getItem("locations"));
 
 		if(storage) {
-			this.locationsSubject.value;
+			storage.map(location => {
+				this.locationsSubject.value.push(location);
+			});
 			this.locationsSubject.next(this.locationsSubject.value);
+			console.log(this.locationsSubject.value);
+			console.log("Storage");
 		} else {
 			this.locationsSubject.next([]);
+			console.log("Null");
 		}
 	}
 
 	clear() {
-		localStorage.setItem("locations", null);
-
+		localStorage.clearItem("locations", null);
 		this.read();
 	}
 
@@ -54,10 +58,7 @@ export class LocationsService {
 
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
-		
-
 		this.save();
-		
 	}
 
 	save() {

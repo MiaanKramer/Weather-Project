@@ -78,7 +78,7 @@ export class LocationModalComponent {
   addlocation() {
 	if(this.addLocation.valid) {
 		this.locationService.add(this.addLocation.value);
-		console.log(this.addLocation.value);
+		this._snackbar.open("Location Added", null, { duration: 3000});
 	} else {
 		this._snackbar.open("Location Invalid", null, { duration: 3000});
 	}
