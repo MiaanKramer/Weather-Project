@@ -36,14 +36,14 @@ export class LocationsModalEditComponent {
     this.dialogRef.close();
   }
 
-  updateLocation() {
-      if(this.editLocation.valid) {
-        this.locationService.replace(this.index, this.editLocation.value);
-        this._snackbar.open("Location Updated", null, { duration: 3000 });
-      } else {
-        this._snackbar.open("Location Data Invalid", null, { duration: 3000});
-      }
-  }
+  // updateLocation() {
+  //     if(this.editLocation.valid) {
+  //       this.locationService.replace(this.index, this.editLocation.value);
+  //       this._snackbar.open("Location Updated", null, { duration: 3000 });
+  //     } else {
+  //       this._snackbar.open("Location Data Invalid", null, { duration: 3000});
+  //     }
+  // }
 
 ngOnInit() {
   this.selectedType = this.data.location.type;
