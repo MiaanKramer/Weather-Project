@@ -8,7 +8,7 @@ export class convertPipe implements PipeTransform {
     transform(value: any) {
         if (this.settings.get().unitType == "metric") {
             return (value + '°C');
-        } else if (this.settings.get().unitType == "imperial") {
+        } else if (this.settings.get().unitType == "imperial") {`   `
             return (value + '°F');
         }
 

@@ -131,7 +131,6 @@ export class LocationsService {
 			return {lngExceedsBounds: true}
 		}
 
-
 	}
 
 }
