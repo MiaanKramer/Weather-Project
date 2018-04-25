@@ -8,7 +8,8 @@ import { MatSidenavModule, MatButtonModule, MatToolbarModule,
          MatGridListModule, MatDividerModule, MatFormFieldModule,
          MatInputModule, MatCardModule, MatMenuModule, MatIconModule,
          MatProgressSpinnerModule, MatSelectModule, MatCheckboxModule,
-          MatDialogModule, matDialogAnimations, MatSnackBarModule, MatRadioModule
+          MatDialogModule, matDialogAnimations, MatSnackBarModule, MatRadioModule,
+          MatListModule
         
   } from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -67,7 +68,8 @@ import { convertPipe, windPipe, directionPipe } from './pipes/convert.pipe';
     MatCheckboxModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule
   ],
   providers: [
     SettingsService,

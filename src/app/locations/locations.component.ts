@@ -25,8 +25,8 @@ export class LocationsComponent implements OnInit {
 		this.locations.clear();
 	}
 
-	delete(index) {
-		this.locations.delete(index);
+	delete(location) {
+		this.locations.delete(location);
 	}
 
     openEdit(location: Location) {
@@ -35,7 +35,14 @@ export class LocationsComponent implements OnInit {
           width: '350px',
           height: '330px',
           data: location
-        });
+		});
+
+		dialogRef.afterClosed().subscribe(location => {
+			if(location){
+				this.locations.update(location);
+			}
+		});
+
 	}
 
 	openAdd() {
@@ -43,5 +50,12 @@ export class LocationsComponent implements OnInit {
 			width: '350px',
 			height: '330px'
 		});
+
+		dialogRef.afterClosed().subscribe(location => {
+			if(location){
+				this.locations.add(location);
+			}
+		});
+
 	}
 }

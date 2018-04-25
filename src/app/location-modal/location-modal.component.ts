@@ -1,15 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { LocationsService, Location} from '../locations.service';
+import { Location} from '../locations.service';
 import { Observable } from 'rxjs';
 import {MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-location-modal',
   templateUrl: './location-modal.component.html',
-  styleUrls: ['./location-modal.component.scss']
+  styleUrls: ['./location-modal.component.scss'],
+  host: {
+      class: 'mat-typography'
+  }
 
 })
 export class LocationModalComponent implements OnInit{
@@ -32,11 +35,11 @@ export class LocationModalComponent implements OnInit{
         cityId: this.cityIdControl,
     });
 
-    isCreate = false;
+    action = 'create';
+    original = null;
 
     constructor(
             public dialogRef: MatDialogRef<LocationModalComponent>,
-            private fb: FormBuilder,
             @Inject(MAT_DIALOG_DATA) public data: Location,
             private _snackbar: MatSnackBar,
             private _http: HttpClient
@@ -48,13 +51,16 @@ export class LocationModalComponent implements OnInit{
 
         if(this.data) {
             location = this.data;
+            this.action = 'update';
         }else{
             location = {
                 id: null,
                 type: 'coordinates'
             };
+            this.action = 'create';
         }
 
+        this.original = location;
         this.formGroup.reset(location);
         this.updateValidators(location.type);
 
@@ -81,16 +87,32 @@ export class LocationModalComponent implements OnInit{
 
         switch(type){
             case 'coordinates':
-                this.latControl.setValidators([Validators.required]);
-                this.lngControl.setValidators([Validators.required]);
+                this.latControl.setValidators([
+                    Validators.required,
+                    Validators.min(-90),
+                    Validators.max(90),
+                ]);
+                this.lngControl.setValidators([
+                    Validators.required,
+                    Validators.min(-180),
+                    Validators.max(180),
+                ]);
                 break;
             case 'zipCode':
-                this.zipCodeControl.setValidators([Validators.required]);
-                this.countryCodeControl.setValidators([Validators.required]);
+                this.zipCodeControl.setValidators([
+                    Validators.required
+                ]);
+                this.countryCodeControl.setValidators([
+                    Validators.required
+                ]);
                 break;
             case 'cityName':
-                this.cityNameControl.setValidators([Validators.required]);
-                this.countryCodeControl.setValidators([Validators.required]);
+                this.cityNameControl.setValidators([
+                    Validators.required
+                ]);
+                this.countryCodeControl.setValidators([
+                    Validators.required
+                ]);
                 break;
         }
 
@@ -111,14 +133,21 @@ export class LocationModalComponent implements OnInit{
     addlocation() {
         console.log(this.formGroup.valid, this.formGroup.errors);
         if(this.formGroup.valid) {
-
             let location = this.formGroup.value;
 
-            this._snackbar.open("Location Added", null, { duration: 3000});
+            if(this.original){
+                location.id = this.original.id;
+            }
+
+            this.dialogRef.close(location);
+            if(this.action === 'create'){
+                this._snackbar.open("Location Added", null, { duration: 3000});
+            }else{
+                this._snackbar.open("Location Updated", null, { duration: 3000});
+            }
         } else {
             this._snackbar.open("Location Invalid", null, { duration: 3000});
         }
-        this.dialogRef.close();
     }
 
     checkLocationName(control: AbstractControl) {

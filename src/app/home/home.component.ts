@@ -18,9 +18,7 @@ export class HomeComponent implements OnInit {
     constructor(private weatherService: WeatherService, private locationService: LocationsService) { }
 
 	locations: Observable<Location[]>;
-	
 	weathersSubject: Observable<LocalWeather[]>;
-    
 
     ngOnInit() {
 		this.locations = this.locationService.observe();
@@ -34,6 +32,5 @@ export class HomeComponent implements OnInit {
 			// and display the retrieved Api requests as DOM elements
 			return Observable.combineLatest(obs);
 		});
-      
 	}
 }

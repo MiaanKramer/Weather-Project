@@ -32,6 +32,9 @@ export class LocationsService {
 	}
 
 	add(location: Location) : void {
+
+		location.id = generateID(10);
+
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
@@ -47,9 +50,9 @@ export class LocationsService {
 		this.save();
 	}
 
-	set(update: Location){
+	update(update: Location){
 		let next = this.locationsSubject.value.map(loc => {
-			if(loc.id = update.id) return update;
+			if(loc.id === update.id) return update;
 			return loc;
 		});
 		this.locationsSubject.next(next);
@@ -136,4 +139,14 @@ export class LocationsService {
 	}
 
 
+}
+
+function generateID(length) {
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	for (var i = 0; i < length; i++)
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	return text;
 }

@@ -45,19 +45,19 @@ export class WeatherService {
 		params = params.append('units', settings.unitType);
 
 		let url = `${WeatherService.BASE_URL}forecast`;
-		return this.http.get<any>(url, {params: params}) 
+		return this.http.get<any>(url, {params: params})
 				   .map(results => {
 
-						let localWeather: LocalWeather = Object.assign({
+						let localWeather: LocalWeather = {
+							type: location.type,
 							cityName: results.city.name,
-							cityId: results.city.id,
+							// cityId: results.city.id,
 							lat: results.city.coord.lat,
 							lng: results.city.coord.lon,
 							forecasts: []
-						},);
+						};
 
 						localWeather.forecasts = results.list.map(result => {
-							
 							return {
 								dateTime: result.dt_txt,
 								tempMin: result.main.temp_min,
@@ -86,6 +86,12 @@ export interface Forecast {
 	windDirection: number;
 }
 
-export interface LocalWeather extends Location {
+export interface LocalWeather {
 	forecasts: Forecast[];
+	type: 'coordinates' | 'zipcode' | 'cityName';
+	cityName?: string;
+	lat?: string;
+	lng?: string;
+	zipCode?: string;
+	countryCode?: string;
 }
