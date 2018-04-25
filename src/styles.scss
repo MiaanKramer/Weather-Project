@@ -11,3 +11,17 @@ html, body {
 
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+.mat-button, .mat-raised-button {
+    text-transform: uppercase;
+}
+
+.actions-right {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.mat-form-field {
+    width: 100%;
+}

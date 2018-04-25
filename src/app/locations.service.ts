@@ -7,6 +7,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 export interface Location {
 
+	id: string;
 	type: 'coordinates' | 'zipcode' | 'cityName';
 	cityName?: string;
 	lat?: string;
@@ -19,57 +20,47 @@ export interface Location {
 export class LocationsService {
 
 	private locationsSubject = new BehaviorSubject<Location[]>([]);
+	private locationsObs = this.locationsSubject.asObservable();
 
-	constructor(private _http: HttpClient) { }
-
-	OnInit() {
+	constructor(private _http: HttpClient) {
 		this.read();
-	}
-
-	replace(index: number, location: Location) {
-		this.locationsSubject[index].value = location;
-		this.locationsSubject.next(this.locationsSubject.value);
-		this.save();
-	}
-
-	read() {
-
-		let storage: Location[] = JSON.parse(localStorage.getItem("locations"));
-
-		if(storage) {
-			storage.map(location => {
-				this.locationsSubject.value.push(location);
-			});
-			this.locationsSubject.next(this.locationsSubject.value);
-		} else {
-			this.locationsSubject.next([]);
-		}
 	}
 
 	clear() {
-		localStorage.clearItem("locations", null);
-		this.read();
+		localStorage.setItem("locations", '[]');
+		this.locationsSubject.next([]);
 	}
 
 	add(location: Location) : void {
+
+		location.id = generateID(10);
 
 		this.locationsSubject.value.push(location);
 		this.locationsSubject.next(this.locationsSubject.value);
 		this.save();
 	}
 
-	save() {
-		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
+	delete(remove: Location) {
+
+		let next = this.locationsSubject.value.filter(loc => {
+			if(loc.id === remove.id) return false;
+			return true;
+		});
+		this.locationsSubject.next(next);
+		this.save();
+	}
+
+	update(update: Location){
+		let next = this.locationsSubject.value.map(loc => {
+			if(loc.id === update.id) return update;
+			return loc;
+		});
+		this.locationsSubject.next(next);
+		this.save();
 	}
 
 	observe() {
-
-		return this.locationsSubject.asObservable();
-	}
-
-	delete(index) {
-		this.locationsSubject.value.splice(index, 1);
-		this.save();
+		return this.locationsObs;
 	}
 
 	// Location Validation
@@ -121,16 +112,40 @@ export class LocationsService {
 			return {NaN: true}
 		}
 
-
-
 		if(lat > 90 || lat < -90) {
 			return {latExceedsBounds: true}
 		}
-		
+
 		if(lng > 180 || lng < -180) {
 			return {lngExceedsBounds: true}
 		}
 
 	}
 
+	private save() {
+		localStorage.setItem("locations", JSON.stringify(this.locationsSubject.value));
+	}
+
+	private read() {
+
+		let storage: Location[] = JSON.parse(localStorage.getItem("locations"));
+
+		if(storage) {
+			this.locationsSubject.next(storage);
+		} else {
+			this.locationsSubject.next([]);
+		}
+	}
+
+
+}
+
+function generateID(length) {
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	for (var i = 0; i < length; i++)
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	return text;
 }
