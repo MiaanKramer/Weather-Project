@@ -6,12 +6,12 @@
             <mat-list>
                 <mat-list-item *ngFor="let loc of (locationsSubject | async); index as i">
                     <mat-icon matListIcon>place</mat-icon>
-                    <p matLine *ngIf="loc.cityName">{{ loc.cityName | titlecase }}</p>
-                    <p matLine *ngIf="loc.lat !== null">Lat: {{ loc.lat }}</p>
-                    <p matLine *ngIf="loc.lng !== null">Lng: {{ loc.lng }}</p>
-                    <p matLine *ngIf="loc.countryCode">Country: {{ loc.countryCode }}</p>
-                    <p matLine *ngIf="loc.zipCode">Zip Code: {{ loc.zipCode }}</p>
-                    <p matLine *ngIf="loc.type">{{ loc.type }}</p>
+                    <p matLine *ngIf="loc.cityName !== null">{{ loc.cityName | titlecase }}</p>
+                    <p matLine *ngIf="loc.lat !== null">Lat: {{ loc.lat }}°</p>
+                    <p matLine *ngIf="loc.lng !== null">Lng: {{ loc.lng }}°</p>
+                    <p matLine *ngIf="loc.countryCode !== null">Country Code: {{ loc.countryCode | uppercase}}</p>
+                    <p matLine *ngIf="loc.zipCode !== null">Zip Code: {{ loc.zipCode }}</p>
+                    <p matLine *ngIf="loc.type">By {{ loc.type | titlecase}}</p>
                     <button mat-icon-button color="primary" (click)="openEdit(loc)">
                         <mat-icon>edit</mat-icon>
                     </button>

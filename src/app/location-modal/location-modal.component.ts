@@ -65,13 +65,10 @@ export class LocationModalComponent implements OnInit{
         this.updateValidators(location.type);
 
         this.typeControl.valueChanges.subscribe(type => {
-            console.log(type);
             this.updateValidators(type);
         });
 
         this.formGroup.valueChanges.subscribe(value => {
-            console.log(value);
-            console.log(this.formGroup.errors);
         });
 
     }

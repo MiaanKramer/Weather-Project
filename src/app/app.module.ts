@@ -14,6 +14,8 @@ import { MatSidenavModule, MatButtonModule, MatToolbarModule,
   } from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { APP_ROUTES } from './app-routing.module';
@@ -69,7 +71,9 @@ import { convertPipe, windPipe, directionPipe } from './pipes/convert.pipe';
     MatDialogModule,
     MatSnackBarModule,
     MatRadioModule,
-    MatListModule
+    MatListModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [
     SettingsService,

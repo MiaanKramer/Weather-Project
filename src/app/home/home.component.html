@@ -1,24 +1,25 @@
 <app-view toolbarTitle="Home">
     <div *ngIf="weathersSubject | async as localWeathers">
-        <div *ngFor="let loc of localWeathers">
-            <mat-grid-list cols="4" gutterSize="15px" rowHeight="2:1">
-                <h3>{{loc.type | uppercase}}</h3>
-                <mat-grid-tile *ngFor="let cast of loc.forecasts">
-                    <mat-card>
-                        <mat-card-title>{{cast.dateTime}}</mat-card-title>
+            <div *ngFor="let loc of localWeathers">
+                <span class="title">{{loc.type | titlecase}}</span>
+                <div class="container">
+                    <mat-card *ngFor="let cast of loc.forecasts" class="weather text-center">
+                        <mat-card-subtitle>
+                            <span>{{ cast.dateTime }}</span>
+                        </mat-card-subtitle>
+                        <mat-card-title>
+                            <img mat-card-sm-image src="http://openweathermap.org/img/w/{{cast.conditionIcon}}.png">
+                        </mat-card-title>
                         <mat-card-content>
-                            <img mat-card-sm-image src="http://openweathermap.org/img/w/{{cast.conditionIcon}}.png" alt="{{cast.condition}}">
-                            <mat-card>
-                                <mat-card-title>{{cast.tempAvg | convertTemp}}</mat-card-title>
-                                <mat-card-subtitle>{{cast.condition}}</mat-card-subtitle>
-                                <mat-card-content>
-                                    {{cast.tempMin | convertTemp}} {{cast.tempMax | convertTemp}}
-                                </mat-card-content>
-                            </mat-card>
+                            <h2>{{ cast.tempAvg | convertTemp }}</h2>
                         </mat-card-content>
+                        <mat-card-footer>
+                            <h5>Min Temp: {{ cast.tempMax | convertTemp }}</h5>
+                            <h5>Max Temp: {{ cast.tempMin | convertTemp }}</h5>
+                        </mat-card-footer>
                     </mat-card>
-                </mat-grid-tile>
-            </mat-grid-list >
+                </div>
+            </div>
         </div>
-    </div>
 </app-view>
+

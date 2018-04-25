@@ -65,5 +65,5 @@
     </span>
 
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-raised-button color="primary" type="submit" form="add_location_form">Add</button>
+    <button mat-raised-button color="primary" type="submit" form="add_location_form">{{ action === 'create' ? 'Add' : 'Update' }}</button>
 </mat-dialog-actions>

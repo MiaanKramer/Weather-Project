@@ -39,7 +39,31 @@ export class LocationsComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe(location => {
 			if(location){
-				this.locations.update(location);
+				let temp : Location;
+				if(location.type == "coordinates") {
+					temp = {
+						type: "coordinates",
+						id: location.id,
+						lat: location.lat,
+						lng: location.lng
+					}
+				} else if(location.type == "zipCode") {
+					temp = {
+						type: "zipcode",
+						id: location.id,
+						zipCode: location.zipCode,
+						countryCode: location.countryCode
+					}
+				} else if(location.type == "cityName") {
+					temp = {
+						type: "zipcode",
+						id: location.id,
+						cityName: location.cityName,
+						countryCode: location.countryCode
+					}
+				}
+				console.log(temp);
+				this.locations.update(temp);
 			}
 		});
 
