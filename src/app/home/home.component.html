@@ -1,7 +1,16 @@
 <app-view toolbarTitle="Home">
-    <div *ngIf="weathersSubject | async as localWeathers">
+    <div *ngIf="weathersSubject | async as localWeathers" class="view-forecast">
             <div *ngFor="let loc of localWeathers">
-                <span class="title">{{loc.type | titlecase}}</span>
+                <span *ngIf="loc.type == 'coordinates'">
+                    <h2 display-2 class="forecast-heading">Coordinates Lat:{{loc.lat}} Lng:{{loc.lng}}</h2>
+                </span>
+                <span *ngIf="loc.type == 'zipcode'">
+                    <h2 display-2 class="forecast-heading">ZIP:{{loc.zipcode}} Country Code: {{loc.countryCode | uppercase}}</h2>
+                </span>
+                <span *ngIf="loc.type == 'cityName'">
+                    <h2 display-2 class="forecast-heading">{{loc.cityName | titlecase}}</h2>
+                </span>
+                <mat-divider></mat-divider>
                 <div class="container">
                     <mat-card *ngFor="let cast of loc.forecasts" class="weather text-center">
                         <mat-card-subtitle>
@@ -14,8 +23,8 @@
                             <h2>{{ cast.tempAvg | convertTemp }}</h2>
                         </mat-card-content>
                         <mat-card-footer>
-                            <h5>Min Temp: {{ cast.tempMax | convertTemp }}</h5>
-                            <h5>Max Temp: {{ cast.tempMin | convertTemp }}</h5>
+                            <p>Min Temp: {{ cast.tempMax | convertTemp }}</p>
+                            <p>Max Temp: {{ cast.tempMin | convertTemp }}</p>
                         </mat-card-footer>
                     </mat-card>
                 </div>

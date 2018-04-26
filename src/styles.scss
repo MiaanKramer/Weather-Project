@@ -3,6 +3,14 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.forecast-heading {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: #673ab7;
+    font-size: 25px;
+
 }
 
 .text-right {
@@ -16,9 +24,34 @@ html, body {
     text-align: center;
 }
 
+.button-box {
+    padding: 20px;
+}
+
 .title {
     margin-left: 15px;
     font-size: 35px;
+}
+
+.view-forecast {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.view-locations {
+    height: 100%;
+    width: 100%;
+}
+
+.location {
+    width: auto;
+    height: auto;
+}
+
+.button-box {
+    text-align: center;
+    padding-bottom: 0;
 }
 
 .container {
@@ -27,14 +60,14 @@ html, body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 15px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    
+    padding-top: 0;
+    width: 100%;
 }
 
 .weather {
     margin: auto;
     margin: 15px;
+    border: 1px solid black;
 }
 
 

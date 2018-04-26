@@ -1,31 +1,30 @@
 <app-view toolbarTitle="Locations">
 
-    <mat-card>
-
-        <mat-card-content>
-            <mat-list>
-                <mat-list-item *ngFor="let loc of (locationsSubject | async); index as i">
-                    <mat-icon matListIcon>place</mat-icon>
-                    <p matLine *ngIf="loc.cityName !== null">{{ loc.cityName | titlecase }}</p>
-                    <p matLine *ngIf="loc.lat !== null">Lat: {{ loc.lat }}°</p>
-                    <p matLine *ngIf="loc.lng !== null">Lng: {{ loc.lng }}°</p>
-                    <p matLine *ngIf="loc.countryCode !== null">Country Code: {{ loc.countryCode | uppercase}}</p>
-                    <p matLine *ngIf="loc.zipCode !== null">Zip Code: {{ loc.zipCode }}</p>
-                    <p matLine *ngIf="loc.type">By {{ loc.type | titlecase}}</p>
-                    <button mat-icon-button color="primary" (click)="openEdit(loc)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" (click)="delete(loc)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions class="actions-right">
+<div class="view-locations">
+        <div class="button-box">
             <button mat-raised-button (click)="openAdd()" color="primary">Add Location</button>
             <button mat-button (click)="clear()" color="primary">Clear Locations</button>
-        </mat-card-actions>
-
-    </mat-card>
+        </div>
+        <div class="container">
+            <mat-list>
+                <mat-list-item *ngFor="let loc of (locationsSubject | async); index as i" class="location">
+                    <mat-icon matListAvatar>place</mat-icon>
+                    <p matLine *ngIf="loc.type"><strong>By {{ loc.type | titlecase}}</strong></p>
+                    <p matLine *ngIf="loc.type == 'cityName'">{{ loc.cityName | titlecase }}</p>
+                    <p matLine *ngIf="loc.type == 'coordinates'">Lat: {{ loc.lat }}°</p>
+                    <p matLine *ngIf="loc.type == 'coordinates'">Lng: {{ loc.lng }}°</p>
+                    <p matLine *ngIf="loc.type == 'cityName' || loc.type == 'zipCode'">Country Code: {{ loc.countryCode | uppercase}}</p>
+                    <p matLine *ngIf="loc.type == 'zipCode'">Zip Code: {{ loc.zipCode }}</p>
+                    <button mat-icon-button color="primary" (click)="openEdit(loc)">
+                        <mat-icon color="black">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="delete(loc)">
+                        <mat-icon color="black">delete</mat-icon>
+                    </button>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </div>
+</div>
 
 </app-view>
