@@ -50,8 +50,9 @@ export class LocationModalComponent implements OnInit{
         let location: Location;
 
         if(this.data) {
-            location = this.data;
+            location = this.data;            
             this.action = 'update';
+            
         }else{
             location = {
                 id: null,
@@ -146,15 +147,4 @@ export class LocationModalComponent implements OnInit{
             this._snackbar.open("Location Invalid", null, { duration: 3000});
         }
     }
-
-    checkLocationName(control: AbstractControl) {
-        // return this.locationService
-        //             .validateCity(control.value)
-        //             .map(result => {
-        //                 console.log('Validate City', result);
-        //                 if(result) return null;
-        //                 else return { invalidCity: true };
-        //             });
-    }
-
 }

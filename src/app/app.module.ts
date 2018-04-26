@@ -32,7 +32,6 @@ import { LocationsComponent } from './locations/locations.component';
 import { HomeComponent } from './home/home.component';
 import { LocationModalComponent } from './location-modal/location-modal.component';
 import { convertPipe, windPipe, directionPipe } from './pipes/convert.pipe';
-// import { LocationsModalEditComponent } from './locations-modal-edit/locations-modal-edit.component';
 
 
 @NgModule({

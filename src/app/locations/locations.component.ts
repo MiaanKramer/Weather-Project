@@ -37,8 +37,6 @@ export class LocationsComponent implements OnInit {
           data: location
 		});
 
-		console.log(location);
-
 		dialogRef.afterClosed().subscribe(location => {
 			if(location){
 				this.locations.update(location);

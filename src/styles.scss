@@ -6,22 +6,16 @@ html, body {
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
+.toolbar {
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
 .forecast-heading {
     font-family: Roboto,"Helvetica Neue",sans-serif;
     color: #673ab7;
     font-size: 25px;
 
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-left {
-    text-align: left;
-}
-.text-center {
-    text-align: center;
 }
 
 .button-box {
@@ -44,10 +38,6 @@ html, body {
     width: 100%;
 }
 
-.location {
-    width: auto;
-    height: auto;
-}
 
 .button-box {
     text-align: center;
@@ -59,16 +49,17 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 15px;
     padding-top: 0;
     width: 100%;
+    border-radius: 25px;
+    
+    .weather {
+        margin: auto;
+        margin: 15px;
+        border: 1px solid black;
+    }
 }
 
-.weather {
-    margin: auto;
-    margin: 15px;
-    border: 1px solid black;
-}
 
 
 

@@ -9,47 +9,25 @@
                 <mat-option value="cityName">City name</mat-option>
             </mat-select>
         </mat-form-field>
-
         <mat-form-field *ngSwitchCase="'coordinates'">
             <input type="number" placeholder="Latitude" matInput formControlName="lat">
             <mat-hint>Value Between -90 And 90</mat-hint>
-            <mat-error>
-                Please enter valid latitude between -90 and 90
-            </mat-error>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'coordinates'">
             <input type="number" placeholder="Longitude" matInput formControlName="lng">
             <mat-hint>Value Between -180 And 180</mat-hint>
-            <mat-error>
-                Please enter valid longitude between -180 and 180
-            </mat-error>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'zipCode'">
-            <input type="text" placeholder="Zip Code" matInput formControlName="zipCode">
-            <mat-hint>Central Paarl's Is 7646</mat-hint>
-            <mat-error *ngIf="formGroup.get('zipCode').errors && formGroup.get('zipCode').required">
-                Invalid longitude value
-            </mat-error>
+            <input type="number" placeholder="Zip Code" matInput formControlName="zipCode">
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'zipCode'">
             <input type="text" placeholder="Country Code" matInput formControlName="countryCode">
-            <mat-hint>South Africa's Code Is 'ZA'</mat-hint>
-            <mat-error *ngIf="formGroup.get('countryCode').errors && formGroup.get('countryCode').required">
-                Invalid longitude value
-            </mat-error>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'cityName'">
             <input type="text" placeholder="City Name" matInput formControlName="cityName">
-            <mat-error *ngIf="formGroup.get('cityName').errors && formGroup.get('cityName').required">
-                Invalid longitude value
-            </mat-error>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'cityName'">
             <input type="text" placeholder="Country Code" matInput formControlName="countryCode">
-            <mat-hint>South Africa's Code Is 'ZA'</mat-hint>
-            <mat-error *ngIf="formGroup.get('countryCode').errors && formGroup.get('countryCode').required">
-                Invalid longitude value
-            </mat-error>
         </mat-form-field>
     </form>
 </mat-dialog-content>

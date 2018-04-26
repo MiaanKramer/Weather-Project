@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 import { SettingsService } from './settings.service';
 import { Location } from './locations.service';
 
 import { Observable } from 'rxjs';
+
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 
 import { Pipe } from '@angular/core';
 import { count } from 'rxjs/operator/count';
@@ -21,6 +25,10 @@ export class WeatherService {
 		private http: HttpClient,
 		private settings: SettingsService
 	){}
+
+	public errorHandler = (error: HttpErrorResponse) => {
+		return Observable.throw(error.message || "Server Error");
+	}
 
 	getForecastByLocation(location: Location){
 		return this.requestForecast(location);
@@ -71,7 +79,7 @@ export class WeatherService {
 						});
 
 						return localWeather;
-				   });
+				   }).catch(this.errorHandler);
 	}
 }
 
