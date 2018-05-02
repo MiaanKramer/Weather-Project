@@ -3,7 +3,7 @@
     <div *ngIf="weathersSubject | async as localWeathers" class="view-forecast">
             <div *ngFor="let loc of localWeathers">
                 <span *ngIf="loc.type == 'coordinates'">
-                    <h2 display-2 class="forecast-heading">Coordinates Lat:{{loc.lat}} Lng:{{loc.lng}}</h2>
+                    <h2 display-2 class="forecast-heading">Coordinates</h2>
                 </span>
                 <span *ngIf="loc.type == 'zipcode'">
                     <h2 display-2 class="forecast-heading">ZIP:{{loc.zipcode}} Country Code: {{loc.countryCode | uppercase}}</h2>

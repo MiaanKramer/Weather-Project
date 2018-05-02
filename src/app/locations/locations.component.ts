@@ -4,6 +4,7 @@ import { LocationModalComponent } from '../location-modal/location-modal.compone
 import { Observable } from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { locateHostElement } from '@angular/core/src/render3/instructions';
+import { GeolocateDialogComponent } from '../geolocate-dialog/geolocate-dialog.component';
 // import { LocationsModalEditComponent } from '../locations-modal-edit/locations-modal-edit.component';
 
 @Component({
@@ -27,6 +28,13 @@ export class LocationsComponent implements OnInit {
 
 	delete(location) {
 		this.locations.delete(location);
+	}
+
+	openGeoLocate() {
+		let dialogRef = this.dialog.open(GeolocateDialogComponent, {
+			width: '500px',
+			height: '685px',
+		});
 	}
 
     openEdit(location: Location) {

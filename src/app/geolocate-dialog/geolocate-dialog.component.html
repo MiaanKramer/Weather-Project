@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Select a Location</h2>
+
+<form>
+	<mat-form-field>
+		<input matInput type="text" placeholder="Search" [matAutocomplete]="auto" [formControl]="searchTerm">
+		<mat-autocomplete #auto="matAutocomplete">
+			<mat-option *ngFor="let result of searhResults | async" [value]="result.formatted_address" (click)="centerLocation(result)">
+				{{ result.formatted_address }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+</form>
+
+<mat-dialog-content>
+    <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="moveMarker($event)" [zoom]="zoom">
+		<agm-marker [latitude]="markLat" [longitude]="markLng"></agm-marker>
+    </agm-map>
+</mat-dialog-content>
+	<p>Lat: <geo-coordinates [value]="markLat"></geo-coordinates></p>
+	<p>Lng: <geo-coordinates [value]="markLng"></geo-coordinates></p>
+<mat-dialog-actions>
+	<button mat-button mat-dialog-close>CANCEL</button>
+	<button mat-raised-button color="primary" (click)="addLocation()">SAVE</button>
+</mat-dialog-actions>

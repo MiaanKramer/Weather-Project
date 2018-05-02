@@ -26,10 +26,6 @@ export class SettingsComponent implements OnInit {
         this.formGroup.reset(this.settingsService.get());
     }
 
-    answer: string = '';
-    answerDisplay: string = '';
-    showSpinner: boolean = false;
-
     reset() {
         this.settingsService.reset();
         this.formGroup.reset(this.settingsService.get());
