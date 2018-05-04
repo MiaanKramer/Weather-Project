@@ -33,7 +33,7 @@ export class LocationsComponent implements OnInit {
 	openGeoLocate() {
 		let dialogRef = this.dialog.open(GeolocateDialogComponent, {
 			width: '500px',
-			height: '685px',
+			height: '720px',
 		});
 	}
 

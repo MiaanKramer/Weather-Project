@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeolocateDialogComponentComponent } from './geolocate-dialog-component.component';
+import { GeolocateDialogComponent } from './geolocate-dialog.component';
 
 describe('GeolocateDialogComponentComponent', () => {
-  let component: GeolocateDialogComponentComponent;
-  let fixture: ComponentFixture<GeolocateDialogComponentComponent>;
+  let component: GeolocateDialogComponent;
+  let fixture: ComponentFixture<GeolocateDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeolocateDialogComponentComponent ]
+      declarations: [ GeolocateDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeolocateDialogComponentComponent);
+    fixture = TestBed.createComponent(GeolocateDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

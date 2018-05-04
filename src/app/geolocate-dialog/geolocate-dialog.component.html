@@ -4,21 +4,37 @@
 	<mat-form-field>
 		<input matInput type="text" placeholder="Search" [matAutocomplete]="auto" [formControl]="searchTerm">
 		<mat-autocomplete #auto="matAutocomplete">
-			<mat-option *ngFor="let result of searhResults | async" [value]="result.formatted_address" (click)="centerLocation(result)">
+			<mat-option *ngFor="let result of searhResults | async" [value]="result.formatted_address" (click)="center(result)">
 				{{ result.formatted_address }}
 			</mat-option>
 		</mat-autocomplete>
 	</mat-form-field>
+	<!-- https://blog.cloudboost.io/integrating-google-maps-in-angular-5-ca5f68009f29 -->
+	<!-- https://stackoverflow.com/questions/48134937/load-google-maps-js-api-in-component-angular -->
 </form>
-
 <mat-dialog-content>
-    <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="moveMarker($event)" [zoom]="zoom">
-		<agm-marker [latitude]="markLat" [longitude]="markLng"></agm-marker>
-    </agm-map>
 </mat-dialog-content>
-	<p>Lat: <geo-coordinates [value]="markLat"></geo-coordinates></p>
-	<p>Lng: <geo-coordinates [value]="markLng"></geo-coordinates></p>
+<mat-dialog-content>
+	<agm-map
+	[latitude]="map.lat" 
+	[longitude]="map.lng"
+	(mapClick)="move($event, map.markEditable)" 
+	[zoom]="map.zoom" 
+	[mapTypeControl]="true" 
+	[disableDefaultUI]="true" 
+	[streetViewControl]="false" 
+	[clickableIcons]="false">
+		<agm-marker
+			[latitude]="map.mLat"
+			[longitude]="map.mLng">
+		</agm-marker>
+		<agm-polygon></agm-polygon>
+	</agm-map>
+</mat-dialog-content>
+	<p>Lat: <geo-coordinates [value]="map.mLat"></geo-coordinates></p>
+	<p>Lng: <geo-coordinates [value]="map.mLng"></geo-coordinates></p>
 <mat-dialog-actions>
 	<button mat-button mat-dialog-close>CANCEL</button>
-	<button mat-raised-button color="primary" (click)="addLocation()">SAVE</button>
+	<button mat-raised-button color="primary">SAVE</button>
+	<button mat-button color="primary" (click)="lockMarker()">SET MARKER</button>
 </mat-dialog-actions>
